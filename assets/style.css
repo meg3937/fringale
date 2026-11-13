@@ -1,0 +1,265 @@
+/* La Fringale — feuille de style */
+
+:root {
+  --noir: #0f0f0f;
+  --noir-2: #1a1918;
+  --creme: #eee4d0;
+  --creme-2: #cfc4ae;
+  --rouge: #e2231a;
+  --rouge-fonce: #c41e16;
+  --rouge-texte: #ff5a4f;
+  --trait: rgba(238, 228, 208, 0.35);
+  --titre: 'Anton', 'Impact', sans-serif;
+  --mono: 'Space Mono', ui-monospace, monospace;
+  --texte: 'Archivo', system-ui, sans-serif;
+  --page: 1240px;
+  --marge: clamp(16px, 4vw, 40px);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  margin: 0;
+  background: var(--noir);
+  color: var(--creme);
+  font-family: var(--texte);
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+[hidden] { display: none !important; }
+a { color: var(--creme); }
+a:hover { color: #fff; }
+:focus-visible { outline: 3px solid var(--rouge-texte); outline-offset: 3px; }
+
+.conteneur { max-width: var(--page); margin: 0 auto; padding-left: var(--marge); padding-right: var(--marge); }
+.mono { font-family: var(--mono); }
+.majuscules { text-transform: uppercase; }
+.visuellement-cache { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ---------- Bandeau d'annonce ---------- */
+.annonce {
+  background: var(--creme); color: var(--noir);
+  font-family: var(--mono); font-weight: 700; font-size: 14px;
+  text-align: center; padding: 10px var(--marge);
+}
+.annonce[hidden] { display: none; }
+
+/* ---------- En-tête ---------- */
+.entete { border-bottom: 3px solid var(--creme); }
+.entete .conteneur {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 12px 28px; padding-top: 18px; padding-bottom: 18px;
+}
+.logo { font-family: var(--titre); font-size: 30px; letter-spacing: 1px; text-transform: uppercase; text-decoration: none; line-height: 1; }
+.logo span { color: var(--rouge); }
+.nav { display: flex; flex-wrap: wrap; gap: 6px 24px; font-family: var(--mono); font-size: 14px; text-transform: uppercase; }
+.nav a { text-decoration: none; padding: 6px 0; }
+.nav a[aria-current="page"] { text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 2px; }
+
+.bouton-tel {
+  font-family: var(--mono); font-weight: 700; text-decoration: none;
+  color: var(--noir); background: var(--creme);
+  padding: 10px 16px; min-height: 44px; display: inline-flex; align-items: center; gap: 8px;
+  box-shadow: 4px 4px 0 var(--rouge);
+}
+.bouton-tel:hover { color: var(--noir); transform: translate(-1px, -1px); box-shadow: 5px 5px 0 var(--rouge); }
+
+.bouton {
+  display: inline-block; text-decoration: none;
+  background: var(--rouge); color: #fff;
+  font-family: var(--titre); font-size: 24px; letter-spacing: 1px; text-transform: uppercase;
+  padding: 12px 26px; box-shadow: 4px 4px 0 var(--creme);
+  border: 0; cursor: pointer;
+}
+.bouton:hover { color: #fff; transform: translate(-1px, -1px); box-shadow: 5px 5px 0 var(--creme); }
+
+.lien-fleche { font-family: var(--mono); font-weight: 700; }
+
+/* ---------- Accueil : héros ---------- */
+.heros .conteneur {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 24px;
+  padding-top: 40px; padding-bottom: 72px;
+}
+.heros-texte { flex: 1 1 520px; min-width: 0; }
+.surtitre { margin: 0 0 14px; font-family: var(--mono); font-size: 13px; text-transform: uppercase; }
+.heros h1 {
+  margin: 0; font-family: var(--titre); font-weight: 400;
+  font-size: clamp(84px, 13vw, 190px); line-height: 1.04; letter-spacing: -1px; text-transform: uppercase;
+}
+.heros h1 .rouge { color: var(--rouge); }
+
+.ce-soir { margin-top: 28px; border: 3px solid var(--creme); padding: 18px 20px; max-width: 500px; }
+.ce-soir-etiquette { margin: 0; font-family: var(--mono); font-size: 13px; font-weight: 700; text-transform: uppercase; color: var(--rouge-texte); }
+.ce-soir-ville { margin: 4px 0 0; font-family: var(--titre); font-size: clamp(40px, 6vw, 52px); line-height: 1.05; text-transform: uppercase; }
+.ce-soir-lieu { margin: 2px 0 0; }
+.ce-soir-message { margin: 10px 0 0; font-size: 15px; color: var(--creme-2); }
+
+.heros-actions { display: flex; flex-wrap: wrap; gap: 14px 18px; margin-top: 24px; align-items: center; }
+.heros-actions p { margin: 0; max-width: 30ch; font-size: 15px; }
+
+.heros-visuel { flex: 1 1 440px; min-width: 0; position: relative; display: flex; justify-content: center; padding-top: 56px; }
+.mascotte { width: 100%; max-width: 600px; height: auto; mix-blend-mode: lighten; }
+.bulle {
+  position: absolute; top: 0; right: 0; max-width: 230px;
+  background: var(--creme); color: var(--noir); border: 3px solid var(--noir);
+  box-shadow: 4px 4px 0 var(--rouge);
+  padding: 10px 14px; font-family: var(--mono); font-size: 13px; font-weight: 700; line-height: 1.35;
+  transform: rotate(3deg);
+}
+.tampon {
+  position: absolute; left: 4%; bottom: -4%;
+  width: 128px; height: 128px; border-radius: 50%; border: 3px solid var(--creme); background: var(--noir);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+  font-family: var(--mono); font-size: 12px; line-height: 1.2; text-transform: uppercase;
+  transform: rotate(-12deg);
+}
+.tampon strong { font-family: var(--titre); font-weight: 400; font-size: 36px; line-height: 1; }
+
+/* ---------- Bande des villes ---------- */
+.bande {
+  background: var(--rouge); color: var(--noir);
+  font-family: var(--titre); font-size: clamp(26px, 3vw, 34px); letter-spacing: 1px; text-transform: uppercase;
+  white-space: nowrap; overflow: hidden; padding: 10px 0;
+}
+.bande-defile { display: inline-block; animation: defile 40s linear infinite; }
+@keyframes defile { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .bande-defile { animation: none; } }
+
+/* ---------- Sections ---------- */
+.section { padding-top: 64px; padding-bottom: 64px; }
+.section + .section-bord { border-top: 3px solid var(--creme); }
+.titre-section {
+  margin: 0 0 8px; font-family: var(--titre); font-weight: 400;
+  font-size: clamp(48px, 7vw, 64px); line-height: 1; text-transform: uppercase;
+}
+.chapo { margin: 0 0 28px; }
+.note-mono { font-family: var(--mono); font-size: 14px; }
+
+/* ---------- Tournée ---------- */
+.tournee-grille { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 20px; margin-top: 28px; }
+.etape { border: 3px solid var(--creme); padding: 20px; display: flex; flex-direction: column; gap: 6px; }
+.etape-jour { font-family: var(--mono); font-size: 13px; font-weight: 700; text-transform: uppercase; }
+.etape-ville { font-family: var(--titre); font-size: 40px; line-height: 1.05; text-transform: uppercase; }
+.etape.aujourdhui { background: var(--creme); color: var(--noir); }
+.etape.ferme { opacity: 0.55; }
+
+/* ---------- Carte (extrait accueil) ---------- */
+.carte-accueil { display: flex; flex-wrap: wrap; gap: 48px; }
+.carte-accueil > div { flex: 1 1 440px; min-width: 0; }
+.ticket { font-family: var(--mono); font-size: 15px; }
+.ticket-ligne { display: flex; gap: 12px; padding: 10px 0; border-bottom: 2px dashed var(--trait); }
+.ticket-ligne span:first-child { flex: 1; font-weight: 700; }
+.ticket-ligne span:not(:first-child) { width: 56px; text-align: right; white-space: nowrap; }
+.ticket-entete { font-size: 12px; text-transform: uppercase; padding-top: 18px; }
+.ticket-entete:first-child { padding-top: 10px; }
+.ticket-entete span:first-child { font-weight: 400; }
+
+.polaroids { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; align-content: start; }
+.polaroid { margin: 0; border: 3px solid var(--creme); background: var(--creme); }
+.polaroid img { width: 100%; aspect-ratio: 1; object-fit: cover; }
+.polaroid figcaption { font-family: var(--mono); font-size: 12px; padding: 6px 8px; text-transform: uppercase; color: var(--noir); }
+.polaroid:nth-child(1) { transform: rotate(-2deg); }
+.polaroid:nth-child(2) { transform: rotate(2deg); margin-top: 24px; }
+.polaroid:nth-child(3) { grid-column: span 2; transform: rotate(1deg); }
+.polaroid:nth-child(3) img { aspect-ratio: 16 / 9; }
+.polaroid:nth-child(3) figcaption { background: var(--rouge); color: #fff; }
+
+/* ---------- Famille ---------- */
+.famille { background: var(--creme); color: var(--noir); }
+.famille a { color: var(--noir); }
+.famille .conteneur { display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start; padding-top: 64px; padding-bottom: 72px; }
+.famille-texte { flex: 1 1 520px; min-width: 0; }
+.famille-texte p { font-size: 19px; margin: 0 0 14px; max-width: 58ch; }
+.famille .titre-section span { color: var(--rouge-fonce); }
+.photo-camion { margin-top: 24px; border: 3px solid var(--noir); width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+.badge { flex: 0 1 340px; min-width: 0; border: 3px solid var(--noir); background: #fff; box-shadow: 8px 8px 0 var(--rouge-fonce); }
+.badge img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+.badge div { padding: 14px 16px; border-top: 3px solid var(--noir); }
+.badge p { margin: 0; }
+.badge-numero { font-family: var(--mono); font-size: 12px; text-transform: uppercase; }
+.badge-nom { font-family: var(--titre); font-size: 30px; text-transform: uppercase; margin: 2px 0 6px !important; }
+
+/* ---------- Avis ---------- */
+.avis-grille { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; margin-bottom: 24px; }
+.avis-carte { margin: 0; border: 3px solid var(--creme); padding: 20px; display: flex; flex-direction: column; gap: 12px; }
+.avis-carte blockquote { margin: 0; }
+.avis-carte figcaption { font-family: var(--mono); font-size: 13px; text-transform: uppercase; }
+.etoiles { color: var(--rouge-texte); letter-spacing: 2px; }
+.avis-actions { display: flex; flex-wrap: wrap; gap: 12px 28px; }
+
+/* ---------- Fidélité ---------- */
+.fidelite { border: 3px dashed var(--creme); padding: 22px; display: flex; flex-wrap: wrap; gap: 8px 24px; align-items: center; justify-content: space-between; }
+.fidelite strong { font-family: var(--titre); font-weight: 400; font-size: 34px; text-transform: uppercase; line-height: 1.1; }
+
+/* ---------- Pied de page ---------- */
+.pied { background: var(--rouge); color: #fff; }
+.pied a { color: #fff; }
+.pied .conteneur { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 20px; align-items: flex-end; padding-top: 44px; padding-bottom: 44px; }
+.pied-logo { font-family: var(--titre); font-size: clamp(52px, 9vw, 104px); line-height: 0.95; text-transform: uppercase; }
+.pied-infos { font-family: var(--mono); font-size: 14px; text-align: right; }
+.pied-infos .tel { font-weight: 700; font-size: 22px; text-decoration: none; }
+.pied-infos p { margin: 4px 0 0; }
+
+/* ---------- Page carte ---------- */
+.carte-entete { padding-top: 48px; padding-bottom: 8px; }
+.carte-entete h1 { margin: 0; font-family: var(--titre); font-weight: 400; font-size: clamp(64px, 11vw, 140px); line-height: 1; text-transform: uppercase; }
+.filtres { display: flex; flex-wrap: wrap; gap: 10px; margin: 28px 0 8px; }
+.filtre {
+  font-family: var(--mono); font-weight: 700; font-size: 14px; text-transform: uppercase;
+  background: transparent; color: var(--creme); border: 3px solid var(--creme);
+  padding: 10px 16px; min-height: 44px; cursor: pointer;
+}
+.filtre[aria-pressed="true"] { background: var(--creme); color: var(--noir); }
+
+.moment {
+  border: 3px solid var(--creme); background: var(--noir-2);
+  display: flex; flex-wrap: wrap; gap: 20px; align-items: center; padding: 20px; margin: 28px 0 8px;
+}
+.moment img { width: 160px; aspect-ratio: 1; object-fit: cover; border: 3px solid var(--creme); }
+.moment-texte { flex: 1 1 260px; }
+.moment-etiquette { display: inline-block; background: var(--rouge); color: #fff; font-family: var(--mono); font-size: 12px; font-weight: 700; text-transform: uppercase; padding: 4px 8px; }
+.moment h2 { margin: 8px 0 4px; font-family: var(--titre); font-weight: 400; font-size: 40px; text-transform: uppercase; line-height: 1.05; }
+.moment p { margin: 0; }
+
+.groupe-titre { margin: 48px 0 20px; font-family: var(--titre); font-weight: 400; font-size: 44px; text-transform: uppercase; display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+.groupe-titre small { font-family: var(--mono); font-size: 13px; }
+.pizzas { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); gap: 20px; }
+.pizza { border: 3px solid var(--creme); display: flex; flex-direction: column; }
+.pizza img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-bottom: 3px solid var(--creme); }
+.pizza-corps { padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+.pizza h3 { margin: 0; font-family: var(--titre); font-weight: 400; font-size: 32px; line-height: 1.05; text-transform: uppercase; }
+.pizza-ingredients { margin: 0; color: var(--creme-2); flex: 1; }
+.pizza-prix { display: flex; gap: 10px; font-family: var(--mono); font-size: 14px; }
+.pizza-prix span { border: 2px solid var(--creme); padding: 4px 8px; }
+.pizza-prix b { font-size: 16px; }
+
+.infos-carte { margin-top: 48px; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+.info { border: 3px dashed var(--trait); padding: 18px; font-family: var(--mono); font-size: 14px; }
+.info p { margin: 0; }
+
+/* ---------- Bouton d'appel fixe (téléphone) ---------- */
+.appel-fixe { display: none; }
+@media (max-width: 700px) {
+  body { padding-bottom: 76px; }
+  .appel-fixe {
+    display: flex; position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 10;
+    justify-content: center; align-items: center; gap: 10px;
+    background: var(--rouge); color: #fff; text-decoration: none;
+    font-family: var(--titre); font-size: 22px; letter-spacing: 1px; text-transform: uppercase;
+    min-height: 56px; border: 3px solid var(--noir); box-shadow: 0 0 0 3px var(--creme);
+  }
+  .appel-fixe:hover { color: #fff; }
+  .entete .bouton-tel { display: none; }
+  .nav { width: 100%; justify-content: space-between; gap: 6px 14px; font-size: 13px; }
+  .heros .conteneur { padding-top: 24px; padding-bottom: 56px; }
+  .heros-visuel { padding-top: 64px; }
+  .bulle { max-width: 200px; font-size: 12px; }
+  .tampon { width: 104px; height: 104px; font-size: 10px; }
+  .tampon strong { font-size: 30px; }
+  .pied-infos { text-align: left; }
+}

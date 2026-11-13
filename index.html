@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>La Fringale · Pizzas au camion depuis 2005 · Ruminghem, Coquelles, Ardres, Marquise</title>
+  <meta name="description" content="La Fringale, le camion à pizzas de Shirley et David depuis 2005. Mardi Ruminghem, mercredi Coquelles, vendredi Ardres, samedi Marquise, de 17h à 21h. Commande au 06 09 62 64 93.">
+  <meta name="theme-color" content="#0f0f0f">
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="La Fringale · Pizzas au camion depuis 2005">
+  <meta property="og:description" content="Ruminghem, Coquelles, Ardres, Marquise. De 17h à 21h, commande au 06 09 62 64 93.">
+  <meta property="og:image" content="images/partage.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;600;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FoodEstablishment",
+    "name": "La Fringale",
+    "description": "Camion à pizzas de Shirley et David, depuis 2005.",
+    "servesCuisine": "Pizza",
+    "telephone": "+33609626493",
+    "foundingDate": "2005",
+    "priceRange": "8 € – 14 €",
+    "areaServed": ["Ruminghem", "Coquelles", "Ardres", "Marquise"],
+    "openingHoursSpecification": [
+      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday", "Wednesday", "Friday", "Saturday"], "opens": "17:00", "closes": "21:00" }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <p class="annonce" id="annonce" hidden></p>
+
+  <header class="entete">
+    <div class="conteneur">
+      <a class="logo" href="index.html">La Fringale<span>.</span></a>
+      <nav class="nav" aria-label="Navigation principale">
+        <a href="#tournee">Où on est</a>
+        <a href="carte.html">Les pizzas</a>
+        <a href="#famille">La famille</a>
+        <a href="#avis">Avis</a>
+      </nav>
+      <a class="bouton-tel" href="tel:+33609626493" data-tel data-tel-texte>06 09 62 64 93</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="heros" aria-labelledby="titre-heros">
+      <div class="conteneur">
+        <div class="heros-texte">
+          <p class="surtitre">Pizzas au camion · Shirley &amp; David · depuis 2005</p>
+          <h1 id="titre-heros">Ça<br>creuse<span class="rouge"> ?</span></h1>
+          <div class="ce-soir" id="ce-soir" aria-live="polite">
+            <p class="ce-soir-etiquette">Ce soir · 17h → 21h</p>
+            <p class="ce-soir-ville">La tournée</p>
+            <p class="ce-soir-lieu">Ruminghem, Coquelles, Ardres, Marquise</p>
+          </div>
+          <div class="heros-actions">
+            <a class="bouton" href="tel:+33609626493" data-tel>Je commande</a>
+            <p>Appelle dès le matin, on te la sort du four pile à l’heure.</p>
+          </div>
+        </div>
+        <div class="heros-visuel">
+          <img class="mascotte" src="images/mascotte.png" width="779" height="511" alt="La mascotte de La Fringale : un piment rouge qui tient une pelle à pizza et lève le pouce">
+          <p class="bulle" id="bulle">Salut ! Moi, je goûte tout avant toi.</p>
+          <p class="tampon" aria-label="En famille depuis 2005">Depuis<strong>2005</strong>en famille</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="bande" id="bande" aria-hidden="true">Ruminghem ✶ Coquelles ✶ Ardres ✶ Marquise ✶</div>
+
+    <section class="section" id="tournee" aria-labelledby="titre-tournee">
+      <div class="conteneur">
+        <h2 class="titre-section" id="titre-tournee">La tournée</h2>
+        <ol class="tournee-grille" id="tournee-liste" style="list-style: none; padding: 0; margin-bottom: 0"></ol>
+        <p class="note-mono" id="jours-repos" style="margin: 20px 0 0"></p>
+      </div>
+    </section>
+
+    <section class="section section-bord" id="pizzas" aria-labelledby="titre-pizzas" style="border-top: 3px solid var(--creme)">
+      <div class="conteneur carte-accueil">
+        <div>
+          <h2 class="titre-section" id="titre-pizzas">Les pizzas</h2>
+          <p class="chapo">La 26 cm pour une fringale, la 29 cm pour une grosse fringale.</p>
+          <div class="ticket" id="ticket"></div>
+          <p style="margin-top: 22px"><a class="lien-fleche" href="carte.html">→ Voir les <span id="nb-pizzas">25</span> pizzas</a></p>
+        </div>
+        <div class="polaroids" id="polaroids"></div>
+      </div>
+    </section>
+
+    <section class="famille" id="famille" aria-labelledby="titre-famille">
+      <div class="conteneur">
+        <div class="famille-texte">
+          <h2 class="titre-section" id="titre-famille">Trois générations<br><span>de pâte</span></h2>
+          <p>Tout a commencé avec la grand-mère, qui faisait déjà ses pizzas d’un endroit à l’autre.</p>
+          <p>En 2005, Shirley et David ont pris le volant. Depuis, le camion fait la même tournée, et on connaît la commande de pas mal d’entre vous par cœur.</p>
+          <img class="photo-camion" id="photo-camion" src="" alt="Le camion de La Fringale" hidden>
+        </div>
+        <div class="badge">
+          <img src="images/chienne.jpg" width="640" height="800" alt="La chienne de la famille, assise sur le canapé" loading="lazy">
+          <div>
+            <p class="badge-numero" id="badge-numero">Badge n°001 · Sécurité cabine</p>
+            <p class="badge-nom" id="nom-chienne">La vraie patronne</p>
+            <p>Elle ne rate aucune tournée. Elle reste dans la cabine, et elle a un avis sur toutes les garnitures.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="avis" aria-labelledby="titre-avis">
+      <div class="conteneur">
+        <div id="avis-bloc" style="margin-bottom: 40px" hidden>
+          <h2 class="titre-section" id="titre-avis">Ce qu’on dit de nous</h2>
+          <p class="chapo note-mono">(et c’est pas nous qui l’écrivons, c’est Google)</p>
+          <div class="avis-grille" id="avis-liste" hidden></div>
+          <div class="avis-actions">
+            <a class="lien-fleche" href="#" data-lien-avis hidden>→ Lire tous les avis</a>
+            <a class="lien-fleche" href="#" data-lien-avis hidden>→ Toi aussi, laisse ton avis</a>
+          </div>
+        </div>
+        <div class="fidelite">
+          <strong>10 points = 1 pizza offerte</strong>
+          <span class="note-mono">Collecte les points sur tes boîtes à pizza. À partir de 10, c’est cadeau.</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pied">
+    <div class="conteneur">
+      <div class="pied-logo">La Fringale</div>
+      <div class="pied-infos">
+        <a class="tel" href="tel:+33609626493" data-tel data-tel-texte>06 09 62 64 93</a>
+        <p>Shirley &amp; David · depuis 2005</p>
+        <p><a href="#" data-reseau="facebook" hidden>Facebook</a> <a href="#" data-reseau="instagram" hidden>Instagram</a></p>
+        <p>© <span id="annee">2026</span> La Fringale</p>
+      </div>
+    </div>
+  </footer>
+
+  <a class="appel-fixe" href="tel:+33609626493" data-tel>Appeler pour commander</a>
+
+  <script src="assets/donnees.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
