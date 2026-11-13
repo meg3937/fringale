@@ -18,7 +18,8 @@ window.FRINGALE = {
 
   // Laisser vide '' tant qu'on n'a pas l'info : le site s'adapte.
   nomMascotte: '',         // ex : 'Fringant'
-  nomChienne: '',          // ex : 'Lola'
+  nomChienne: 'Pops',
+  photoShirley: '',        // ex : 'images/shirley.jpg'
   lienAvisGoogle: '',      // lien de la fiche Google (celui du QR code)
   facebook: '',
   instagram: '',

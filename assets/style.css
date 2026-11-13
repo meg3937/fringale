@@ -89,9 +89,11 @@ a:hover { color: #fff; }
 .surtitre { margin: 0 0 14px; font-family: var(--mono); font-size: 13px; text-transform: uppercase; }
 .heros h1 {
   margin: 0; font-family: var(--titre); font-weight: 400;
-  font-size: clamp(84px, 13vw, 190px); line-height: 1.04; letter-spacing: -1px; text-transform: uppercase;
+  font-size: clamp(72px, 11vw, 176px); line-height: 0.96; letter-spacing: -1px; text-transform: uppercase;
 }
 .heros h1 .rouge { color: var(--rouge); }
+.insecable { white-space: nowrap; display: block; }
+.heros h1 .ligne-1 { display: block; margin-bottom: 0.26em; }
 
 .ce-soir { margin-top: 28px; border: 3px solid var(--creme); padding: 18px 20px; max-width: 500px; }
 .ce-soir-etiquette { margin: 0; font-family: var(--mono); font-size: 13px; font-weight: 700; text-transform: uppercase; color: var(--rouge-texte); }
@@ -158,6 +160,14 @@ a:hover { color: #fff; }
 .ticket-entete { font-size: 12px; text-transform: uppercase; padding-top: 18px; }
 .ticket-entete:first-child { padding-top: 10px; }
 .ticket-entete span:first-child { font-weight: 400; }
+.ticket-pizza summary { cursor: pointer; list-style: none; }
+.ticket-pizza summary::-webkit-details-marker { display: none; }
+.ticket-pizza summary:hover span:first-child { color: #fff; text-decoration: underline; text-underline-offset: 4px; }
+.ticket-plus { display: inline-block; width: 1.4em; color: var(--rouge-texte); transition: transform 0.15s; }
+.ticket-pizza[open] .ticket-plus { transform: rotate(45deg); }
+.ticket-pizza[open] summary { border-bottom-style: solid; }
+.ticket-ingredients { margin: 0; padding: 10px 0 12px 1.4em; font-family: var(--texte); font-size: 15px; color: var(--creme-2); border-bottom: 2px dashed var(--trait); }
+.astuce { margin: 0 0 6px; font-family: var(--mono); font-size: 12px; color: var(--creme-2); }
 
 .polaroids { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; align-content: start; }
 .polaroid { margin: 0; border: 3px solid var(--creme); background: var(--creme); }
@@ -201,8 +211,6 @@ a:hover { color: #fff; }
 .fidelite { border: 3px dashed var(--creme); padding: 22px; display: flex; flex-wrap: wrap; gap: 8px 24px; align-items: center; justify-content: space-between; }
 .fidelite strong { font-family: var(--titre); font-weight: 400; font-size: 34px; text-transform: uppercase; line-height: 1.1; }
 .fidelite > div { flex: 1 1 320px; }
-.sticker-fidelite { width: 150px; transform: rotate(8deg); margin: -60px 0 -40px; filter: drop-shadow(5px 7px 0 rgba(0, 0, 0, 0.5)); }
-@media (max-width: 700px) { .sticker-fidelite { width: 120px; margin: 0 auto -50px; } }
 
 /* ---------- Pied de page ---------- */
 .pied { background: var(--rouge); color: #fff; }
@@ -271,3 +279,36 @@ a:hover { color: #fff; }
   .tampon strong { font-size: 30px; }
   .pied-infos { text-align: left; }
 }
+
+/* ---------- Équipe ---------- */
+.equipe { flex: 1 1 100%; margin-top: 24px; }
+.equipe-titre { margin: 0 0 32px; font-family: var(--titre); font-weight: 400; font-size: 40px; text-transform: uppercase; }
+.equipe-grille { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 40px 32px; align-items: end; }
+.membre { margin: 0; }
+.membre-cadre { background: #fff; border: 3px solid var(--noir); padding: 12px 12px 0; box-shadow: 6px 6px 0 var(--noir); max-width: 320px; margin: 0 auto; }
+.membre:nth-child(1) .membre-cadre { transform: rotate(-2deg); }
+.membre:nth-child(2) .membre-cadre { transform: rotate(1.5deg); }
+.membre-cadre img, .membre-initiale { width: 100%; aspect-ratio: 1; object-fit: cover; }
+.membre-initiale { display: flex; align-items: center; justify-content: center; background: var(--rouge); color: var(--creme); font-family: var(--titre); font-size: 140px; line-height: 1; }
+.membre figcaption { padding: 12px 4px 14px; display: flex; flex-direction: column; }
+.membre strong { font-family: var(--titre); font-weight: 400; font-size: 32px; text-transform: uppercase; line-height: 1.1; }
+.membre figcaption span { font-family: var(--mono); font-size: 12px; text-transform: uppercase; }
+.equipe .patronne { flex: none; }
+
+/* ---------- Fidélité : mascotte ---------- */
+.mascotte-fidelite { width: 220px; mix-blend-mode: lighten; margin: -30px -10px -30px 0; }
+@media (max-width: 700px) { .mascotte-fidelite { width: 200px; margin: 8px auto -10px; } }
+
+/* ---------- Fenêtre du numéro ---------- */
+.popup-tel {
+  border: 3px solid var(--creme); background: var(--noir); color: var(--creme);
+  padding: 28px 28px 26px; width: min(420px, calc(100% - 32px)); box-shadow: 8px 8px 0 var(--rouge);
+  text-align: center;
+}
+.popup-tel::backdrop { background: rgba(0, 0, 0, 0.7); }
+.popup-fermer { position: absolute; top: 6px; right: 8px; width: 44px; height: 44px; background: none; border: 0; color: var(--creme); font-size: 30px; cursor: pointer; line-height: 1; }
+.popup-etiquette { margin: 0; font-family: var(--mono); font-size: 13px; font-weight: 700; text-transform: uppercase; color: var(--rouge-texte); }
+.popup-numero { display: block; margin: 6px 0 10px; font-family: var(--titre); font-size: clamp(40px, 11vw, 56px); line-height: 1.1; text-decoration: none; letter-spacing: 1px; white-space: nowrap; }
+.popup-info { margin: 0 0 22px; font-size: 15px; color: var(--creme-2); }
+.popup-actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; align-items: center; }
+.popup-copier { font-family: var(--mono); font-weight: 700; font-size: 14px; background: transparent; color: var(--creme); border: 3px solid var(--creme); padding: 12px 16px; min-height: 48px; cursor: pointer; }

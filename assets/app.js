@@ -187,7 +187,8 @@
       if (!l.length) return;
       html += '<div class="ticket-ligne ticket-entete"><span>Base ' + (b === 'creme' ? 'crème' : 'tomate') + '</span><span>26 cm</span><span>29 cm</span></div>';
       html += l.map(function (p) {
-        return '<div class="ticket-ligne"><span>' + esc(p.nom) + '</span><span>' + prix(p.prix26) + '</span><span>' + prix(p.prix29) + '</span></div>';
+        return '<details class="ticket-pizza"><summary class="ticket-ligne"><span><span class="ticket-plus" aria-hidden="true">+</span>' + esc(p.nom) + '</span><span>' + prix(p.prix26) + '</span><span>' + prix(p.prix29) + '</span></summary>' +
+          '<p class="ticket-ingredients">' + esc(p.ingredients) + '</p></details>';
       }).join('');
     });
     el.innerHTML = html;
@@ -208,6 +209,11 @@
     if (nom) nom.textContent = D.nomChienne || 'La vraie patronne';
     var num = $('#badge-numero');
     if (num) num.textContent = D.nomChienne ? 'Badge n°001 · La vraie patronne' : 'Badge n°001 · Sécurité cabine';
+    var sh = $('#photo-shirley');
+    if (sh && D.photoShirley) {
+      sh.src = D.photoShirley; sh.hidden = false;
+      var ini = $('#initiale-shirley'); if (ini) ini.hidden = true;
+    }
     var bulle = $('#bulle');
     if (bulle) bulle.textContent = D.nomMascotte ? 'Salut, moi c’est ' + D.nomMascotte + '. Je goûte tout avant toi.' : 'Salut ! Moi, je goûte tout avant toi.';
     var cam = $('#photo-camion');
@@ -271,13 +277,37 @@
     }
   }
 
+  /* ---------- Fenêtre avec le numéro de téléphone ---------- */
+  var popupBranchee = false;
+  function brancherPopupTel(D) {
+    var dlg = $('#popup-tel');
+    if (popupBranchee || !dlg || typeof dlg.showModal !== 'function') return;
+    popupBranchee = true;
+    document.querySelectorAll('[data-tel]').forEach(function (el) {
+      el.addEventListener('click', function (e) {
+        e.preventDefault();
+        dlg.showModal();
+      });
+    });
+    dlg.querySelector('[data-fermer]').addEventListener('click', function () { dlg.close(); });
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+    var copier = dlg.querySelector('[data-copier]');
+    copier.addEventListener('click', function () {
+      var ok = function () { copier.textContent = 'Numéro copié !'; setTimeout(function () { copier.textContent = 'Copier le numéro'; }, 2000); };
+      if (navigator.clipboard) navigator.clipboard.writeText(window.FRINGALE.telephone).then(ok, function () {});
+    });
+  }
+
   function rendreCommun(D) {
     var a = $('#annonce');
     if (a) { a.textContent = D.annonce || ''; a.hidden = !D.annonce; }
-    document.querySelectorAll('[data-tel]').forEach(function (el) {
+    document.querySelectorAll('[data-tel], [data-tel-direct]').forEach(function (el) {
       el.href = telHref(D.telephone);
       if (el.hasAttribute('data-tel-texte')) el.textContent = D.telephone;
     });
+    var num = document.querySelector('.popup-numero');
+    if (num) num.textContent = D.telephone;
+    brancherPopupTel(D);
     document.querySelectorAll('[data-reseau]').forEach(function (el) {
       var url = D[el.getAttribute('data-reseau')];
       if (url) { el.href = url; el.hidden = false; } else el.hidden = true;
