@@ -242,7 +242,8 @@
     if (!el) return;
     var filtre = el.getAttribute('data-filtre-actif') || 'toutes';
     function carteHTML(p) {
-      return '<article class="pizza">' + (p.photo ? '<img src="' + esc(p.photo) + '" alt="Pizza ' + esc(p.nom) + '" loading="lazy" width="800" height="600">' : '') +
+      return '<article class="pizza">' + (p.photo ? '<img src="' + esc(p.photo) + '" alt="Pizza ' + esc(p.nom) + '" loading="lazy" width="800" height="600">'
+        : '<div class="pizza-tuile pizza-tuile-' + (p.base === 'creme' ? 'creme' : 'tomate') + '" aria-hidden="true"><span style="--n:' + Math.max(5, String(p.nom).length) + '">' + esc(p.nom) + '</span></div>') +
         '<div class="pizza-corps"><h3>' + esc(p.nom) + '</h3><p class="pizza-ingredients">' + esc(p.ingredients) + '</p>' +
         '<div class="pizza-prix"><span>26 cm <b>' + prix(p.prix26) + '</b></span><span>29 cm <b>' + prix(p.prix29) + '</b></span></div></div></article>';
     }
