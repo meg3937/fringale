@@ -49,6 +49,32 @@ Pour que Shirley et David puissent tout modifier depuis leur téléphone sans to
 Le site affiche d'abord le contenu de `donnees.js`, puis le remplace par celui du Google Sheets.
 Si un onglet manque, c'est `donnees.js` qui reste utilisé.
 
+## Avis Google
+
+Les liens « Lire tous les avis » (fiche Google Maps) et « Laisse ton avis » (lien du QR code)
+sont déjà branchés dans `assets/donnees.js`.
+
+Pour afficher **les avis et la note en direct** sur le site :
+
+1. Sur https://console.cloud.google.com, créer un projet « La Fringale » et y associer un compte
+   de facturation (Google offre un quota gratuit chaque mois ; voir l'étape 5 pour ne jamais payer).
+2. Menu **API et services → Bibliothèque** : activer **Maps JavaScript API** et **Places API (New)**.
+3. **API et services → Identifiants → Créer des identifiants → Clé API**.
+4. Restreindre la clé :
+   - *Restrictions relatives aux applications* : **Sites Web**, ajouter `https://meg3937.github.io/*`
+     (et le futur nom de domaine).
+   - *Restrictions relatives aux API* : cocher seulement les deux API ci-dessus.
+5. **API et services → Places API (New) → Quotas** : plafonner les requêtes par jour
+   (par exemple 100) pour rester dans le gratuit.
+6. Trouver l'identifiant de la fiche (« Place ID ») avec l'outil
+   https://developers.google.com/maps/documentation/javascript/examples/places-placeid-finder
+   en cherchant « La Fringale ».
+7. Renseigner `googleMapsCle` et `googlePlaceId` dans `assets/donnees.js`.
+
+La clé sera visible dans le code du site : c'est normal pour ce type de clé, la restriction
+de l'étape 4 empêche qu'elle serve ailleurs. Google renvoie au maximum 5 avis (ceux qu'il juge
+les plus pertinents). Si le chargement échoue, le site affiche les avis copiés à la main dans `avis`.
+
 ## Voir le site en local
 
 ```sh

@@ -22,7 +22,8 @@ window.FRINGALE = {
   photoShirley: '',        // ex : 'images/shirley.jpg' (la section « Derrière le camion » s'affiche alors)
   roleShirley: '',         // petite phrase sous son nom (sinon « Aux commandes depuis 2005 »)
   roleDavid: '',
-  lienAvisGoogle: '',      // lien de la fiche Google (celui du QR code)
+  lienAvisGoogle: 'https://g.page/r/CeDiKRJtvVrCEAE/review',     // « laisse ton avis » (lien du QR code)
+  lienLireAvis: 'https://maps.google.com/?cid=14004714267415798496', // la fiche Google Maps
   facebook: '',
   instagram: '',
   photoCamion: '',         // ex : 'images/camion.jpg'
@@ -94,7 +95,15 @@ window.FRINGALE = {
     { photo: 'images/pizzas/burger.jpg',   legende: 'La Burger · cheddar, cornichons, tomates' }
   ],
 
-  /* ---------- Avis Google choisis ----------
+  /* ---------- Avis Google en direct ----------
+     Avec une clé Google Maps (restreinte au site) et l'identifiant de la fiche,
+     les 5 avis mis en avant par Google et la note s'affichent tout seuls.
+     Voir le README, partie « Avis Google ».
+  */
+  googleMapsCle: '',
+  googlePlaceId: '',
+
+  /* ---------- Avis choisis à la main (utilisés si les avis en direct ne sont pas branchés) ----------
      Copier ici de vrais avis de la fiche Google. Exemple :
      { auteur: 'Prénom N.', texte: 'Le texte de l’avis…', note: 5 },
   */

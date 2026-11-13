@@ -219,21 +219,67 @@
     if (cam && D.photoCamion) { cam.src = D.photoCamion; cam.hidden = false; }
   }
 
-  function rendreAvis(D) {
+  function etoiles(n) {
+    n = Math.max(0, Math.min(5, Math.round(Number(n) || 0)));
+    return '<span class="etoiles" aria-label="' + n + ' sur 5">' + '★★★★★'.slice(0, n) + '<span class="etoiles-vides">' + '★★★★★'.slice(n) + '</span></span>';
+  }
+  function carteAvis(a) {
+    var auteur = a.lien ? '<a href="' + esc(a.lien) + '" target="_blank" rel="noopener">' + esc(a.auteur) + '</a>' : esc(a.auteur);
+    return '<figure class="avis-carte">' + etoiles(a.note) +
+      '<blockquote>' + esc(a.texte) + '</blockquote>' +
+      '<figcaption>' + (a.photo ? '<img src="' + esc(a.photo) + '" alt="" width="32" height="32" loading="lazy" referrerpolicy="no-referrer">' : '') +
+      '<span>' + auteur + (a.quand ? '<small>' + esc(a.quand) + '</small>' : '') + '</span></figcaption></figure>';
+  }
+  function afficherAvis(D, liste, resume) {
     var el = $('#avis-liste');
-    if (el) {
-      el.innerHTML = (D.avis || []).map(function (a) {
-        var n = Math.max(0, Math.min(5, Number(a.note) || 5));
-        return '<figure class="avis-carte"><span class="etoiles" aria-label="' + n + ' sur 5">' + '★★★★★'.slice(0, n) + '</span>' +
-          '<blockquote>' + esc(a.texte) + '</blockquote><figcaption>' + esc(a.auteur) + '</figcaption></figure>';
-      }).join('');
-      el.hidden = !(D.avis || []).length;
+    if (el) { el.innerHTML = liste.map(carteAvis).join(''); el.hidden = !liste.length; }
+    var r = $('#avis-resume');
+    if (r) {
+      if (resume && resume.note) {
+        r.innerHTML = '<strong>' + String(resume.note.toFixed(1)).replace('.', ',') + '</strong>' + etoiles(resume.note) +
+          '<span>' + (resume.nombre ? resume.nombre + ' avis sur Google' : 'sur Google') + '</span>';
+        r.hidden = false;
+      } else r.hidden = true;
     }
+    var src = $('#avis-source'); if (src) src.hidden = !resume;
+    var bloc = $('#avis-bloc');
+    if (bloc) bloc.hidden = !liste.length && !D.lienAvisGoogle && !D.lienLireAvis;
+    animer();
+  }
+
+  function rendreAvis(D) {
     document.querySelectorAll('[data-lien-avis]').forEach(function (a) {
       if (D.lienAvisGoogle) { a.href = D.lienAvisGoogle; a.hidden = false; } else a.hidden = true;
     });
-    var bloc = $('#avis-bloc');
-    if (bloc) bloc.hidden = !(D.avis || []).length && !D.lienAvisGoogle;
+    document.querySelectorAll('[data-lien-lire]').forEach(function (a) {
+      if (D.lienLireAvis) { a.href = D.lienLireAvis; a.hidden = false; } else a.hidden = true;
+    });
+    afficherAvis(D, (D.avis || []).map(function (a) { return { auteur: a.auteur, texte: a.texte, note: a.note || 5 }; }), null);
+  }
+
+  /* ---------- Avis Google en direct (si une clé et un identifiant de fiche sont renseignés) ---------- */
+  var avisGoogleCharges = false;
+  function chargerAvisGoogle(D) {
+    if (avisGoogleCharges || !D.googleMapsCle || !D.googlePlaceId || !$('#avis-liste')) return;
+    avisGoogleCharges = true;
+    window.__fringaleAvis = function () {
+      google.maps.importLibrary('places').then(function (lib) {
+        var place = new lib.Place({ id: D.googlePlaceId, requestedLanguage: 'fr' });
+        return place.fetchFields({ fields: ['rating', 'userRatingCount', 'reviews', 'googleMapsURI'] }).then(function () {
+          var liste = (place.reviews || []).filter(function (r) { return r.text; }).map(function (r) {
+            var aut = r.authorAttribution || {};
+            return { auteur: aut.displayName || 'Client Google', lien: aut.uri, photo: aut.photoURI, note: r.rating, texte: r.text, quand: r.relativePublishTimeDescription };
+          });
+          if (place.googleMapsURI && !D.lienLireAvis) D.lienLireAvis = place.googleMapsURI;
+          if (!liste.length) return;
+          afficherAvis(D, liste, { note: place.rating, nombre: place.userRatingCount });
+        });
+      }).catch(function () { /* en cas d'échec, on garde les avis de donnees.js */ });
+    };
+    var sc = document.createElement('script');
+    sc.src = 'https://maps.googleapis.com/maps/api/js?key=' + encodeURIComponent(D.googleMapsCle) + '&v=weekly&loading=async&language=fr&callback=__fringaleAvis';
+    sc.async = true;
+    document.head.appendChild(sc);
   }
 
   function rendreCarte(D) {
@@ -385,6 +431,7 @@
     rendrePolaroids(D);
     rendreFamille(D);
     rendreAvis(D);
+    chargerAvisGoogle(D);
     rendreCarte(D);
     animer();
     brancherProfondeur();

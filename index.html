@@ -137,14 +137,20 @@
 
     <section class="section" id="avis" aria-labelledby="titre-avis">
       <div class="conteneur">
-        <div id="avis-bloc" style="margin-bottom: 40px" hidden>
-          <h2 class="titre-section" id="titre-avis">Ce qu’on dit de nous</h2>
-          <p class="chapo note-mono">(et c’est pas nous qui l’écrivons, c’est Google)</p>
+        <div id="avis-bloc" style="margin-bottom: 48px" hidden>
+          <div class="avis-entete">
+            <div>
+              <h2 class="titre-section" id="titre-avis">Ce qu’on dit de nous</h2>
+              <p class="chapo note-mono">(et c’est pas nous qui l’écrivons, c’est Google)</p>
+            </div>
+            <p class="avis-resume" id="avis-resume" hidden></p>
+          </div>
           <div class="avis-grille" id="avis-liste" hidden></div>
           <div class="avis-actions">
-            <a class="lien-fleche" href="#" data-lien-avis hidden>→ Lire tous les avis</a>
-            <a class="lien-fleche" href="#" data-lien-avis hidden>→ Toi aussi, laisse ton avis</a>
+            <a class="lien-fleche" href="#" data-lien-lire target="_blank" rel="noopener" hidden>→ Lire tous les avis</a>
+            <a class="bouton bouton-avis" href="#" data-lien-avis target="_blank" rel="noopener" hidden>Laisse ton avis</a>
           </div>
+          <p class="avis-source note-mono" id="avis-source" hidden>Avis issus de Google</p>
         </div>
         <div class="fidelite">
           <div>
