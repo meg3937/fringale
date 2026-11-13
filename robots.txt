@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /admin.html
+Sitemap: https://meg3937.github.io/fringale/sitemap.xml

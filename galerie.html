@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Galerie · La Fringale, pizzas au camion</title>
+  <meta name="description" content="Les pizzas de La Fringale en photos, et Pops, la vraie patronne du camion.">
+  <meta name="theme-color" content="#0f0f0f">
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+  <meta property="og:title" content="Galerie · La Fringale, pizzas au camion">
+  <meta property="og:image" content="images/partage.jpg">
+  <link rel="preload" href="assets/polices/anton.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <p class="annonce" id="annonce" hidden></p>
+
+  <header class="entete">
+    <div class="conteneur">
+      <a class="logo" href="index.html">La Fringale<span>.</span></a>
+      <nav class="nav" aria-label="Navigation principale">
+        <a href="index.html#tournee">Où on est</a>
+        <a href="carte.html">Les pizzas</a>
+        <a href="galerie.html" aria-current="page">Galerie</a>
+        <a href="index.html#famille">La famille</a>
+        <a href="index.html#avis">Avis</a>
+      </nav>
+      <a class="bouton-tel" href="tel:+33609626493" data-tel data-tel-texte>06 09 62 64 93</a>
+    </div>
+  </header>
+
+  <main class="conteneur" style="padding-bottom: 72px">
+    <div class="carte-entete">
+      <h1>Galerie</h1>
+      <p class="note-mono" style="margin: 8px 0 0">Tout juste sorties du four (et un peu de Pops)</p>
+    </div>
+    <div class="galerie" id="galerie"></div>
+  </main>
+
+  <footer class="pied">
+    <div class="conteneur">
+      <div class="pied-logo">La Fringale</div>
+      <div class="pied-infos">
+        <a class="tel" href="tel:+33609626493" data-tel data-tel-texte>06 09 62 64 93</a>
+        <p>Shirley &amp; David · depuis 2005</p>
+        <p><a href="#" data-reseau="facebook" hidden>Facebook</a> <a href="#" data-reseau="instagram" hidden>Instagram</a></p>
+        <p>© <span id="annee">2026</span> La Fringale · <a href="mentions-legales.html">Mentions légales</a> · <a href="admin.html">Espace d’édition</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <a class="appel-fixe" href="tel:+33609626493" data-tel>Appeler pour commander</a>
+
+  <dialog class="popup-tel" id="popup-tel" aria-labelledby="popup-tel-titre">
+    <button class="popup-fermer" type="button" data-fermer aria-label="Fermer">×</button>
+    <p class="popup-etiquette" id="popup-tel-titre">Pour commander</p>
+    <a class="popup-numero" href="tel:+33609626493" data-tel-direct>06 09 62 64 93</a>
+    <p class="popup-info">Commande dès le matin, ta pizza est prête à l’heure convenue entre 17h et 21h.</p>
+    <div class="popup-actions">
+      <a class="bouton" href="tel:+33609626493" data-tel-direct>Appeler</a>
+      <button class="popup-copier" type="button" data-copier>Copier le numéro</button>
+    </div>
+  </dialog>
+
+  <dialog class="visionneuse" id="visionneuse" aria-label="Photo agrandie">
+    <button class="visionneuse-fermer" type="button" data-fermer aria-label="Fermer">×</button>
+    <figure>
+      <img src="" alt="">
+      <figcaption hidden></figcaption>
+    </figure>
+    <button class="visionneuse-nav visionneuse-prec" type="button" data-precedente aria-label="Photo précédente">←</button>
+    <button class="visionneuse-nav visionneuse-suiv" type="button" data-suivante aria-label="Photo suivante">→</button>
+  </dialog>
+
+  <script src="assets/donnees.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>

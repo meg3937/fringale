@@ -1,0 +1,237 @@
+# Espace d'édition de La Fringale (Pages CMS : https://app.pagescms.org)
+# Chaque entrée ci-dessous devient un menu avec un formulaire.
+
+media:
+  input: images
+  output: images
+
+content:
+  - name: infos
+    label: Infos et annonce
+    type: file
+    path: contenu/infos.json
+    format: json
+    fields:
+      - name: annonce
+        label: Annonce en haut du site
+        type: string
+        description: "Ex : « Fermé exceptionnellement ce samedi ». Laisser vide pour ne rien afficher."
+      - name: pizzaDuMoment
+        label: Pizza du moment
+        type: object
+        fields:
+          - name: nom
+            label: Nom
+            type: string
+            description: Laisser vide s'il n'y a pas de pizza du moment.
+          - name: ingredients
+            label: Ingrédients
+            type: text
+          - name: prix26
+            label: Prix 26 cm (€)
+            type: number
+          - name: prix29
+            label: Prix 29 cm (€)
+            type: number
+          - name: photo
+            label: Photo
+            type: image
+      - name: telephone
+        label: Téléphone
+        type: string
+      - name: heureDebut
+        label: Heure d'ouverture
+        type: number
+      - name: heureFin
+        label: Heure de fermeture
+        type: number
+      - name: nomChienne
+        label: Nom de la chienne
+        type: string
+      - name: nomMascotte
+        label: Nom de la mascotte
+        type: string
+        description: Laisser vide si elle n'a pas de nom.
+      - name: photoShirley
+        label: Photo de Shirley
+        type: image
+        description: La section « Derrière le camion » s'affiche dès que cette photo est ajoutée.
+      - name: roleShirley
+        label: Phrase sous le nom de Shirley
+        type: string
+      - name: roleDavid
+        label: Phrase sous le nom de David
+        type: string
+      - name: photoCamion
+        label: Photo du camion
+        type: image
+      - name: facebook
+        label: Adresse de la page Facebook
+        type: string
+        description: "Ex : https://www.facebook.com/lafringale. Active la partie « Les actus du camion »."
+      - name: instagram
+        label: Adresse du compte Instagram
+        type: string
+      - name: photosAccueil
+        label: Les 3 photos de la page d'accueil
+        type: object
+        list: true
+        fields:
+          - name: photo
+            label: Photo
+            type: image
+          - name: legende
+            label: Légende
+            type: string
+
+  - name: conges
+    label: Congés
+    type: file
+    path: contenu/conges.json
+    format: json
+    fields:
+      - name: conges
+        label: Périodes de congés
+        type: object
+        list: true
+        fields:
+          - name: du
+            label: Du
+            type: date
+          - name: au
+            label: Au (inclus)
+            type: date
+          - name: message
+            label: Petit message
+            type: string
+            description: "Ex : « On recharge les batteries, à bientôt ! »"
+
+  - name: tournee
+    label: La tournée
+    type: file
+    path: contenu/tournee.json
+    format: json
+    fields:
+      - name: tournee
+        label: Emplacements
+        type: object
+        list: true
+        fields:
+          - name: jour
+            label: Jour
+            type: select
+            options:
+              values: [Lundi, Mardi, Mercredi, Jeudi, Vendredi, Samedi, Dimanche]
+          - name: ville
+            label: Ville
+            type: string
+          - name: lieu
+            label: Lieu
+            type: string
+
+  - name: carte
+    label: La carte
+    type: file
+    path: contenu/carte.json
+    format: json
+    fields:
+      - name: pizzas
+        label: Pizzas
+        type: object
+        list: true
+        fields:
+          - name: nom
+            label: Nom
+            type: string
+          - name: base
+            label: Base
+            type: select
+            options:
+              values:
+                - value: tomate
+                  label: Base tomate
+                - value: creme
+                  label: Base crème
+          - name: ingredients
+            label: Ingrédients
+            type: text
+          - name: prix26
+            label: Prix 26 cm (€)
+            type: number
+          - name: prix29
+            label: Prix 29 cm (€)
+            type: number
+          - name: accueil
+            label: Afficher sur la page d'accueil
+            type: boolean
+          - name: photo
+            label: Photo
+            type: image
+
+  - name: galerie
+    label: Galerie
+    type: file
+    path: contenu/galerie.json
+    format: json
+    fields:
+      - name: photos
+        label: Photos
+        type: object
+        list: true
+        fields:
+          - name: photo
+            label: Photo
+            type: image
+          - name: legende
+            label: Légende (facultative)
+            type: string
+
+  - name: avis
+    label: Avis clients
+    type: file
+    path: contenu/avis.json
+    format: json
+    fields:
+      - name: avis
+        label: Avis affichés sur le site
+        type: object
+        list: true
+        fields:
+          - name: auteur
+            label: Prénom
+            type: string
+          - name: texte
+            label: Avis
+            type: text
+          - name: note
+            label: Note (sur 5)
+            type: number
+
+  - name: legal
+    label: Mentions légales
+    type: file
+    path: contenu/legal.json
+    format: json
+    fields:
+      - name: nomCommercial
+        label: Nom commercial
+        type: string
+      - name: raisonSociale
+        label: Raison sociale
+        type: string
+      - name: formeJuridique
+        label: Forme juridique
+        type: string
+        description: "Ex : entreprise individuelle, SARL…"
+      - name: siret
+        label: SIRET
+        type: string
+      - name: adresse
+        label: Adresse du siège
+        type: string
+      - name: responsablePublication
+        label: Responsable de la publication
+        type: string
+      - name: email
+        label: E-mail de contact
+        type: string

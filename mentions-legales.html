@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mentions légales · La Fringale</title>
+  <meta name="description" content="Mentions légales du site de La Fringale, camion à pizzas.">
+  <meta name="theme-color" content="#0f0f0f">
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+  <meta property="og:title" content="Mentions légales · La Fringale">
+  <meta property="og:image" content="images/partage.jpg">
+  <link rel="preload" href="assets/polices/anton.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <p class="annonce" id="annonce" hidden></p>
+
+  <header class="entete">
+    <div class="conteneur">
+      <a class="logo" href="index.html">La Fringale<span>.</span></a>
+      <nav class="nav" aria-label="Navigation principale">
+        <a href="index.html#tournee" aria-current="page">Où on est</a>
+        <a href="carte.html">Les pizzas</a>
+        <a href="galerie.html">Galerie</a>
+        <a href="index.html#famille" aria-current="page">La famille</a>
+        <a href="index.html#avis" aria-current="page">Avis</a>
+      </nav>
+      <a class="bouton-tel" href="tel:+33609626493" data-tel data-tel-texte>06 09 62 64 93</a>
+    </div>
+  </header>
+
+  <main class="conteneur legal" style="padding-bottom: 72px">
+    <div class="carte-entete">
+      <h1>Mentions légales</h1>
+    </div>
+
+    <section>
+      <h2>Éditeur du site</h2>
+      <p><strong data-legal="nomCommercial">La Fringale</strong>, camion à pizzas<br>
+        Raison sociale : <span data-legal="raisonSociale"></span><br>
+        Forme juridique : <span data-legal="formeJuridique"></span><br>
+        SIRET : <span data-legal="siret"></span><br>
+        Adresse : <span data-legal="adresse"></span><br>
+        Téléphone : <a href="tel:+33609626493" data-tel-direct data-tel-texte>06 09 62 64 93</a><br>
+        E-mail : <span data-legal="email"></span></p>
+      <p>Responsable de la publication : <span data-legal="responsablePublication"></span></p>
+    </section>
+
+    <section>
+      <h2>Hébergement</h2>
+      <p>GitHub, Inc. (service GitHub Pages)<br>88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis<br>https://github.com</p>
+    </section>
+
+    <section>
+      <h2>Données personnelles et cookies</h2>
+      <p>Ce site ne comporte aucun formulaire, ne collecte aucune donnée personnelle et ne dépose aucun cookie de mesure d’audience ou de publicité.</p>
+      <p>Pour afficher la note Google de La Fringale, la page d’accueil interroge les services de Google (Google Places), ce qui transmet à Google l’adresse IP du visiteur. Les publications Facebook ne sont chargées que si le visiteur clique sur le bouton prévu à cet effet ; Facebook (Meta) peut alors déposer ses propres cookies. Les liens vers Google Maps et Facebook mènent vers ces services, soumis à leurs propres politiques de confidentialité.</p>
+      <p>Une préférence (afficher directement les publications Facebook) peut être enregistrée dans le navigateur du visiteur s’il la choisit ; elle n’est jamais transmise.</p>
+    </section>
+
+    <section>
+      <h2>Propriété intellectuelle</h2>
+      <p>Les textes, photos, la mascotte et l’identité visuelle de La Fringale sont protégés. Toute reproduction sans autorisation est interdite.</p>
+      <p>Polices de caractères : Anton, Archivo et Space Mono, sous licence SIL Open Font License.</p>
+    </section>
+  </main>
+
+  <footer class="pied">
+    <div class="conteneur">
+      <div class="pied-logo">La Fringale</div>
+      <div class="pied-infos">
+        <a class="tel" href="tel:+33609626493" data-tel data-tel-texte>06 09 62 64 93</a>
+        <p>Shirley &amp; David · depuis 2005</p>
+        <p><a href="#" data-reseau="facebook" hidden>Facebook</a> <a href="#" data-reseau="instagram" hidden>Instagram</a></p>
+        <p>© <span id="annee">2026</span> La Fringale · <a href="mentions-legales.html">Mentions légales</a> · <a href="admin.html">Espace d’édition</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <a class="appel-fixe" href="tel:+33609626493" data-tel>Appeler pour commander</a>
+
+  <dialog class="popup-tel" id="popup-tel" aria-labelledby="popup-tel-titre">
+    <button class="popup-fermer" type="button" data-fermer aria-label="Fermer">×</button>
+    <p class="popup-etiquette" id="popup-tel-titre">Pour commander</p>
+    <a class="popup-numero" href="tel:+33609626493" data-tel-direct>06 09 62 64 93</a>
+    <p class="popup-info">Commande dès le matin, ta pizza est prête à l’heure convenue entre 17h et 21h.</p>
+    <div class="popup-actions">
+      <a class="bouton" href="tel:+33609626493" data-tel-direct>Appeler</a>
+      <button class="popup-copier" type="button" data-copier>Copier le numéro</button>
+    </div>
+  </dialog>
+
+  <script src="assets/donnees.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>

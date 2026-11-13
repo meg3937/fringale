@@ -1,0 +1,229 @@
+{
+  "pizzas": [
+    {
+      "nom": "Marguerite",
+      "base": "tomate",
+      "ingredients": "Fromage à pizza",
+      "prix26": 8,
+      "prix29": 9,
+      "accueil": true,
+      "photo": ""
+    },
+    {
+      "nom": "Reine",
+      "base": "tomate",
+      "ingredients": "Fromage à pizza, jambon, champignons",
+      "prix26": 9,
+      "prix29": 11,
+      "accueil": true,
+      "photo": ""
+    },
+    {
+      "nom": "Orientale",
+      "base": "tomate",
+      "ingredients": "Fromage à pizza, chorizo, champignons",
+      "prix26": 9,
+      "prix29": 11,
+      "accueil": false,
+      "photo": ""
+    },
+    {
+      "nom": "Provençale",
+      "base": "tomate",
+      "ingredients": "Fromage à pizza, oignons, poivrons, tomates, ail, basilic",
+      "prix26": 9,
+      "prix29": 11,
+      "accueil": false,
+      "photo": ""
+    },
+    {
+      "nom": "4 Saisons",
+      "base": "tomate",
+      "ingredients": "Fromage à pizza, thon, poivrons, oignons",
+      "prix26": 10,
+      "prix29": 12,
+      "accueil": true,
+      "photo": ""
+    },
+    {
+      "nom": "Croissant",
+      "base": "tomate",
+      "ingredients": "Calzone : fromage à pizza, jambon, œuf",
+      "prix26": 10,
+      "prix29": 12,
+      "accueil": false,
+      "photo": ""
+    },
+    {
+      "nom": "Bolognaise",
+      "base": "tomate",
+      "ingredients": "Fromage à pizza, viande de bœuf hachée, ketchup",
+      "prix26": 11,
+      "prix29": 13,
+      "accueil": false,
+      "photo": "images/pizzas/bolognaise.jpg"
+    },
+    {
+      "nom": "Paysanne",
+      "base": "tomate",
+      "ingredients": "Fromage à pizza, champignons, lardons, poivrons, oignons, chèvre",
+      "prix26": 11,
+      "prix29": 13,
+      "accueil": true,
+      "photo": "images/pizzas/paysanne.jpg"
+    },
+    {
+      "nom": "Spéciale",
+      "base": "tomate",
+      "ingredients": "Fromage à pizza, jambon, chorizo, merguez, champignons",
+      "prix26": 11,
+      "prix29": 13,
+      "accueil": false,
+      "photo": "images/pizzas/speciale.jpg"
+    },
+    {
+      "nom": "Campagnole",
+      "base": "tomate",
+      "ingredients": "Fromage à pizza, jambon, poulet, oignons, beurre persillé",
+      "prix26": 11,
+      "prix29": 13,
+      "accueil": false,
+      "photo": ""
+    },
+    {
+      "nom": "Raclette",
+      "base": "tomate",
+      "ingredients": "Fromage à pizza, lardons, oignons, raclette, bacon",
+      "prix26": 11,
+      "prix29": 13,
+      "accueil": false,
+      "photo": ""
+    },
+    {
+      "nom": "Carnivore",
+      "base": "tomate",
+      "ingredients": "Fromage à pizza, champignons, jambon, viande hachée, lardons",
+      "prix26": 11,
+      "prix29": 13,
+      "accueil": false,
+      "photo": ""
+    },
+    {
+      "nom": "Texane",
+      "base": "tomate",
+      "ingredients": "Champignons, viande hachée, piment, chorizo, poivrons, oignons",
+      "prix26": 11,
+      "prix29": 13,
+      "accueil": false,
+      "photo": "images/pizzas/texane.jpg"
+    },
+    {
+      "nom": "Catalane",
+      "base": "tomate",
+      "ingredients": "Fromage à pizza, chorizo, merguez, poivrons, oignons, ail, basilic",
+      "prix26": 11,
+      "prix29": 13,
+      "accueil": false,
+      "photo": ""
+    },
+    {
+      "nom": "Miel",
+      "base": "tomate",
+      "ingredients": "Fromage à pizza, chèvre, oignons, miel",
+      "prix26": 11,
+      "prix29": 13,
+      "accueil": false,
+      "photo": ""
+    },
+    {
+      "nom": "Exotique",
+      "base": "tomate",
+      "ingredients": "Fromage à pizza, poulet, chorizo, ananas, oignons",
+      "prix26": 11,
+      "prix29": 13,
+      "accueil": false,
+      "photo": ""
+    },
+    {
+      "nom": "Burger",
+      "base": "tomate",
+      "ingredients": "Viande hachée, sauce burger, cheddar, oignons, cornichons, tomates",
+      "prix26": 11,
+      "prix29": 13,
+      "accueil": true,
+      "photo": "images/pizzas/burger.jpg"
+    },
+    {
+      "nom": "4 Fromages",
+      "base": "creme",
+      "ingredients": "Mélange mozzarella-emmental, reblochon, chèvre, maroilles",
+      "prix26": 11,
+      "prix29": 13,
+      "accueil": false,
+      "photo": ""
+    },
+    {
+      "nom": "Curry",
+      "base": "creme",
+      "ingredients": "Fromage à pizza, curry, chorizo, poulet, oignons, poivrons",
+      "prix26": 11,
+      "prix29": 13,
+      "accueil": false,
+      "photo": ""
+    },
+    {
+      "nom": "Savoyarde",
+      "base": "creme",
+      "ingredients": "Fromage à pizza, pommes de terre, lardons, oignons, reblochon",
+      "prix26": 11,
+      "prix29": 13,
+      "accueil": true,
+      "photo": "images/pizzas/savoyarde.jpg"
+    },
+    {
+      "nom": "Calanque",
+      "base": "creme",
+      "ingredients": "Fromage à pizza, jambon, reblochon",
+      "prix26": 11,
+      "prix29": 13,
+      "accueil": false,
+      "photo": ""
+    },
+    {
+      "nom": "Morteau",
+      "base": "creme",
+      "ingredients": "Fromage à pizza, saucisse de Morteau, lardons, oignons",
+      "prix26": 11,
+      "prix29": 13,
+      "accueil": false,
+      "photo": "images/pizzas/morteau.jpg"
+    },
+    {
+      "nom": "Kebab",
+      "base": "creme",
+      "ingredients": "Fromage à pizza, kebab, oignons",
+      "prix26": 11,
+      "prix29": 13,
+      "accueil": false,
+      "photo": ""
+    },
+    {
+      "nom": "Normande",
+      "base": "creme",
+      "ingredients": "Fromage à pizza, lardons, poulet, oignons, camembert",
+      "prix26": 11,
+      "prix29": 13,
+      "accueil": false,
+      "photo": "images/pizzas/normande.jpg"
+    },
+    {
+      "nom": "Nordique",
+      "base": "creme",
+      "ingredients": "Fromage à pizza, saumon fumé, ail, basilic",
+      "prix26": 12,
+      "prix29": 14,
+      "accueil": true,
+      "photo": ""
+    }
+  ]
+}

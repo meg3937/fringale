@@ -2,82 +2,73 @@
 
 Site du camion à pizzas de Shirley et David (depuis 2005).
 Site statique : du HTML, du CSS et un peu de JavaScript, sans outil de construction.
-Il suffit de l'héberger tel quel (GitHub Pages, Netlify, Cloudflare Pages…).
+Publié avec GitHub Pages : https://meg3937.github.io/fringale/
 
 ## Les fichiers
 
 | Fichier | Rôle |
 |---|---|
-| `index.html` | Page d'accueil : où est le camion ce soir, tournée, extrait de la carte, histoire, avis |
+| `index.html` | Accueil : où est le camion ce soir, tournée, extrait de la carte, famille, actus Facebook, avis |
 | `carte.html` | La carte complète, avec filtres base tomate / base crème |
-| `assets/donnees.js` | **Tout le contenu modifiable** : carte, prix, tournée, congés, annonce, avis… |
+| `galerie.html` | Galerie photo avec visionneuse |
+| `mentions-legales.html` | Mentions légales (remplies depuis `contenu/legal.json`) |
+| `admin.html` | Page d'accès à l'espace d'édition pour Shirley et David (non référencée) |
+| `contenu/*.json` | **Tout le contenu modifiable** : carte, tournée, congés, infos, galerie, avis, mentions légales |
+| `.pages.yml` | Configuration de l'espace d'édition (Pages CMS) |
+| `assets/donnees.js` | Réglages techniques : liens et clé Google, valeurs de secours |
 | `assets/app.js` | Affichage du contenu (pas besoin d'y toucher) |
 | `assets/style.css` | Le style |
-| `images/` | Mascotte, chienne, photos de pizzas (`images/pizzas/`) |
+| `assets/polices/` | Polices hébergées sur le site (Anton, Archivo, Space Mono, licence OFL) |
+| `images/` | Mascotte, Pops, photos de pizzas (`images/pizzas/`) et de la galerie (`images/galerie/`) |
 
-## Modifier le contenu
+## Modifier le contenu : l'espace d'édition
 
-Tout se passe dans `assets/donnees.js`, qui est commenté en français :
+Shirley et David modifient le site depuis **Pages CMS** (https://app.pagescms.org), un outil
+gratuit qui affiche des formulaires à la place du code. Le lien est sur la page `admin.html`
+(« Espace d'édition » en bas de chaque page).
 
-- **Congés** : ajouter une ligne dans `conges`, par exemple
-  `{ du: '2026-12-24', au: '2027-01-05', message: 'On recharge les batteries !' },`
-  Le site affiche alors « En congés jusqu'au 5 janvier » et la date de retour.
-- **Annonce** en haut du site : remplir `annonce: '…'` (laisser `''` pour l'enlever).
-- **Pizza du moment** : remplir `pizzaDuMoment`.
-- **Prix ou nouvelle pizza** : modifier la liste `carte`.
-- **Photo d'une pizza** : déposer la photo dans `images/pizzas/` (par exemple `reine.jpg`)
-  et indiquer `photo: 'images/pizzas/reine.jpg'` sur la bonne ligne.
-- **Avis Google** : copier de vrais avis dans `avis`, et le lien de la fiche dans `lienAvisGoogle`.
+Menus disponibles : **Infos et annonce** (annonce, pizza du moment, téléphone, horaires, photos
+de l'accueil, photo de Shirley, Facebook…), **Congés**, **La tournée**, **La carte**, **Galerie**,
+**Avis clients**, **Mentions légales**. Chaque enregistrement crée un commit sur GitHub, et le
+site se met à jour tout seul en une à deux minutes.
+
+### Mise en place (une seule fois)
+
+1. Aller sur https://app.pagescms.org et se connecter avec le compte GitHub propriétaire du dépôt.
+2. Installer l'application Pages CMS sur le dépôt `fringale` quand elle le demande.
+3. Ouvrir le projet `fringale` : les menus de `.pages.yml` apparaissent. Si le site est publié
+   depuis une autre branche que `main`, choisir cette branche dans Pages CMS.
+4. Donner l'accès à Shirley et David : depuis Pages CMS (paramètres du projet → collaborateurs,
+   invitation par e-mail) ou en les ajoutant comme collaborateurs du dépôt sur GitHub.
+
+### À la main
+
+On peut aussi modifier directement les fichiers `contenu/*.json`. Les dates sont au format
+`AAAA-MM-JJ`, les jours de la tournée en toutes lettres (`Mardi`), la base `tomate` ou `creme`.
 
 Le bloc « Ce soir, on t'attend à… » se calcule tout seul selon le jour, l'heure et les congés.
 
-## Option : modifier depuis un Google Sheets
+## Actus Facebook
 
-Pour que Shirley et David puissent tout modifier depuis leur téléphone sans toucher au code :
-
-1. Créer un Google Sheets avec ces onglets (la 1re ligne contient les titres des colonnes) :
-   - **Carte** : `Nom` · `Base` (tomate / crème) · `Ingrédients` · `Prix 26` · `Prix 29` · `Accueil` (oui / vide) · `Photo`
-   - **Tournée** : `Jour` (mardi…) · `Ville` · `Lieu`
-   - **Congés** : `Du` · `Au` (format 24/12/2026) · `Message`
-   - **Infos** : `Clé` · `Valeur`. Clés reconnues : `Annonce`, `Pizza du moment`,
-     `Pizza du moment - Ingrédients`, `Pizza du moment - Prix 26`, `Pizza du moment - Prix 29`,
-     `Nom de la chienne`, `Nom de la mascotte`, `Lien avis Google`, `Facebook`, `Instagram`
-2. Partager le fichier : « Tous les utilisateurs disposant du lien » → **Lecteur**.
-3. Copier l'identifiant du fichier (la partie entre `/d/` et `/edit` dans l'adresse)
-   dans `googleSheetId` de `assets/donnees.js`.
-
-Le site affiche d'abord le contenu de `donnees.js`, puis le remplace par celui du Google Sheets.
-Si un onglet manque, c'est `donnees.js` qui reste utilisé.
+Dès que l'adresse de la page Facebook est renseignée (menu **Infos et annonce**), la partie
+« Les actus du camion » apparaît sur l'accueil. Les publications ne sont chargées qu'après un clic
+du visiteur (Facebook dépose des cookies : on ne les charge pas sans son accord).
 
 ## Avis Google
 
-Les liens « Lire tous les avis » (fiche Google Maps) et « Laisse ton avis » (lien du QR code)
-sont déjà branchés dans `assets/donnees.js`.
-
-Pour afficher **les avis et la note en direct** sur le site :
-
-1. Sur https://console.cloud.google.com, créer un projet « La Fringale » et y associer un compte
-   de facturation (Google offre un quota gratuit chaque mois ; voir l'étape 5 pour ne jamais payer).
-2. Menu **API et services → Bibliothèque** : activer **Maps JavaScript API** et **Places API (New)**.
-3. **API et services → Identifiants → Créer des identifiants → Clé API**.
-4. Restreindre la clé :
-   - *Restrictions relatives aux applications* : **Sites Web**, ajouter `https://meg3937.github.io/*`
-     (et le futur nom de domaine).
-   - *Restrictions relatives aux API* : cocher seulement les deux API ci-dessus.
-5. **API et services → Places API (New) → Quotas** : plafonner les requêtes par jour
-   (par exemple 100) pour rester dans le gratuit.
-6. Trouver l'identifiant de la fiche (« Place ID ») avec l'outil
-   https://developers.google.com/maps/documentation/javascript/examples/places-placeid-finder
-   en cherchant « La Fringale ».
-7. Renseigner `googleMapsCle` et `googlePlaceId` dans `assets/donnees.js`.
-
-La clé sera visible dans le code du site : c'est normal pour ce type de clé, la restriction
-de l'étape 4 empêche qu'elle serve ailleurs. Google renvoie au maximum 5 avis (ceux qu'il juge
-les plus pertinents). Si le chargement échoue, le site affiche les avis copiés à la main dans `avis`.
+- « Lire tous les avis » (fiche Google Maps) et « Laisse ton avis » (lien du QR code) sont branchés
+  dans `assets/donnees.js`.
+- La note et le nombre d'avis s'affichent en direct grâce à Places API (New), avec une clé
+  restreinte au site (`googleMapsCle`) et l'identifiant de la fiche (`googlePlaceId`).
+- Google ne fournit pas le texte des avis de cette fiche : les avis affichés sont ceux saisis dans
+  le menu **Avis clients**.
+- Le projet Google Cloud est en essai gratuit. À la fin de l'essai, la note disparaît simplement du
+  site si le compte n'est pas passé en compte complet (les liens restent).
 
 ## Voir le site en local
 
 ```sh
 python3 -m http.server 8080
 ```
-puis ouvrir http://localhost:8080
+puis ouvrir http://localhost:8080 (le contenu est chargé depuis `contenu/`, il faut donc passer
+par un petit serveur et non ouvrir le fichier directement).

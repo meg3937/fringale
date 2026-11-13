@@ -12,9 +12,7 @@
   <meta property="og:title" content="La Fringale · Pizzas au camion depuis 2005">
   <meta property="og:description" content="Ruminghem, Coquelles, Ardres, Marquise. De 17h à 21h, commande au 06 09 62 64 93.">
   <meta property="og:image" content="images/partage.jpg">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;600;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="assets/polices/anton.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/style.css">
   <script type="application/ld+json">
   {
@@ -40,10 +38,11 @@
     <div class="conteneur">
       <a class="logo" href="index.html">La Fringale<span>.</span></a>
       <nav class="nav" aria-label="Navigation principale">
-        <a href="#tournee">Où on est</a>
+        <a href="#tournee" aria-current="page">Où on est</a>
         <a href="carte.html">Les pizzas</a>
-        <a href="#famille">La famille</a>
-        <a href="#avis">Avis</a>
+        <a href="galerie.html">Galerie</a>
+        <a href="#famille" aria-current="page">La famille</a>
+        <a href="#avis" aria-current="page">Avis</a>
       </nav>
       <a class="bouton-tel" href="tel:+33609626493" data-tel data-tel-texte>06 09 62 64 93</a>
     </div>
@@ -135,6 +134,22 @@
       </div>
     </section>
 
+    <!-- Affichée dès que l'adresse de la page Facebook est renseignée (contenu/infos.json) -->
+    <section class="section actus" id="actus" aria-labelledby="titre-actus" hidden>
+      <div class="conteneur actus-grille">
+        <div>
+          <h2 class="titre-section" id="titre-actus">Les actus du camion</h2>
+          <p class="chapo">Pizza du moment, congés, changements de dernière minute : tout passe d’abord par notre page Facebook.</p>
+          <a class="lien-fleche" href="#" data-lien-facebook target="_blank" rel="noopener">→ Voir la page Facebook</a>
+        </div>
+        <div class="actus-boite" id="actus-fil">
+          <p>Les publications sont hébergées par Facebook, qui peut déposer des cookies. Elles s’affichent seulement si tu le demandes.</p>
+          <button class="bouton" type="button" id="actus-charger">Afficher les publications</button>
+          <label class="actus-memoire note-mono"><input type="checkbox" id="actus-memoriser"> Toujours les afficher sur cet appareil</label>
+        </div>
+      </div>
+    </section>
+
     <section class="section" id="avis" aria-labelledby="titre-avis">
       <div class="conteneur">
         <div id="avis-bloc" style="margin-bottom: 48px" hidden>
@@ -170,7 +185,7 @@
         <a class="tel" href="tel:+33609626493" data-tel data-tel-texte>06 09 62 64 93</a>
         <p>Shirley &amp; David · depuis 2005</p>
         <p><a href="#" data-reseau="facebook" hidden>Facebook</a> <a href="#" data-reseau="instagram" hidden>Instagram</a></p>
-        <p>© <span id="annee">2026</span> La Fringale</p>
+        <p>© <span id="annee">2026</span> La Fringale · <a href="mentions-legales.html">Mentions légales</a> · <a href="admin.html">Espace d’édition</a></p>
       </div>
     </div>
   </footer>

@@ -1,4 +1,6 @@
-/* La Fringale — affichage du contenu (lit assets/donnees.js, et Google Sheets si branché) */
+/* La Fringale — affichage du contenu.
+   Le contenu vient du dossier contenu/ (fichiers modifiés depuis l'espace d'édition),
+   les réglages techniques de assets/donnees.js. */
 (function () {
   'use strict';
 
@@ -26,65 +28,43 @@
   }
   function jourSeul(d) { return new Date(d.getFullYear(), d.getMonth(), d.getDate()); }
 
-  /* ---------- Google Sheets (optionnel) ---------- */
-  function parseCSV(txt) {
-    var lignes = [], ligne = [], champ = '', guillemets = false;
-    for (var i = 0; i < txt.length; i++) {
-      var c = txt[i];
-      if (guillemets) {
-        if (c === '"' && txt[i + 1] === '"') { champ += '"'; i++; }
-        else if (c === '"') guillemets = false;
-        else champ += c;
-      } else if (c === '"') guillemets = true;
-      else if (c === ',') { ligne.push(champ); champ = ''; }
-      else if (c === '\n') { ligne.push(champ); lignes.push(ligne); ligne = []; champ = ''; }
-      else if (c !== '\r') champ += c;
-    }
-    if (champ || ligne.length) { ligne.push(champ); lignes.push(ligne); }
-    var entetes = (lignes.shift() || []).map(sansAccent);
-    return lignes.filter(function (l) { return l.some(function (x) { return x.trim(); }); }).map(function (l) {
-      var o = {};
-      entetes.forEach(function (h, i) { o[h] = (l[i] || '').trim(); });
-      return o;
-    });
+  /* ---------- Chargement du contenu (dossier contenu/) ---------- */
+  var FICHIERS = ['infos', 'conges', 'tournee', 'carte', 'galerie', 'avis', 'legal'];
+  function lireJSON(nom) {
+    return fetch('contenu/' + nom + '.json', { cache: 'no-cache' })
+      .then(function (r) { return r.ok ? r.json() : {}; })
+      .catch(function () { return {}; });
   }
-  function onglet(id, nom) {
-    var url = 'https://docs.google.com/spreadsheets/d/' + encodeURIComponent(id) + '/gviz/tq?tqx=out:csv&sheet=' + encodeURIComponent(nom);
-    return fetch(url).then(function (r) { if (!r.ok) throw new Error(nom); return r.text(); }).then(parseCSV);
+  function nombre(v) {
+    if (v === '' || v == null) return '';
+    var n = Number(String(v).replace(',', '.'));
+    return isNaN(n) ? '' : n;
   }
-  function chargerSheet(D) {
-    var id = D.googleSheetId;
-    if (!id) return Promise.resolve(D);
-    var nombre = function (v) { return v === '' ? '' : Number(String(v).replace(',', '.').replace(/[^\d.]/g, '')); };
-    var oui = function (v) { return /^(oui|x|1|true|vrai)$/i.test(String(v).trim()); };
-    return Promise.all([
-      onglet(id, 'Carte').catch(function () { return null; }),
-      onglet(id, 'Tournée').catch(function () { return null; }),
-      onglet(id, 'Congés').catch(function () { return null; }),
-      onglet(id, 'Infos').catch(function () { return null; })
-    ]).then(function (r) {
-      if (r[0] && r[0].length) D.carte = r[0].filter(function (p) { return p.nom; }).map(function (p) {
-        return { nom: p.nom, base: /creme/.test(sansAccent(p.base)) ? 'creme' : 'tomate', ingredients: p.ingredients,
-          prix26: nombre(p['prix 26']), prix29: nombre(p['prix 29']), accueil: oui(p.accueil), photo: p.photo || '' };
-      });
-      if (r[1] && r[1].length) D.tournee = r[1].map(function (t) {
-        return { jour: JOURS.map(sansAccent).indexOf(sansAccent(t.jour)), ville: t.ville, lieu: t.lieu };
+  function chemin(p) { return String(p || '').replace(/^\/+/, ''); } // les images sont relatives au site
+  function chargerContenu(D) {
+    if (!window.fetch) return Promise.resolve(D);
+    return Promise.all(FICHIERS.map(lireJSON)).then(function (r) {
+      var infos = r[0] || {};
+      Object.keys(infos).forEach(function (k) { if (infos[k] != null) D[k] = infos[k]; });
+      D.heureDebut = Number(D.heureDebut) || 17;
+      D.heureFin = Number(D.heureFin) || 21;
+      ['photoShirley', 'photoCamion'].forEach(function (k) { D[k] = chemin(D[k]); });
+      if (D.pizzaDuMoment) D.pizzaDuMoment.photo = chemin(D.pizzaDuMoment.photo);
+      D.photosAccueil = (D.photosAccueil || []).filter(function (p) { return p && p.photo; }).map(function (p) { return { photo: chemin(p.photo), legende: p.legende || '' }; });
+      if (r[1].conges) D.conges = r[1].conges.filter(function (c) { return c && c.du && c.au; });
+      if (r[2].tournee) D.tournee = r[2].tournee.map(function (t) {
+        var j = typeof t.jour === 'number' ? t.jour : JOURS.map(sansAccent).indexOf(sansAccent(t.jour || ''));
+        return { jour: j, ville: t.ville || '', lieu: t.lieu || '' };
       }).filter(function (t) { return t.jour >= 0 && t.ville; });
-      if (r[2]) D.conges = r[2].map(function (c) { return { du: c.du, au: c.au, message: c.message }; });
-      if (r[3]) {
-        var infos = {};
-        r[3].forEach(function (l) { infos[sansAccent(l.cle || l.info || '')] = l.valeur || ''; });
-        var map = { 'annonce': 'annonce', 'nom de la chienne': 'nomChienne', 'nom de la mascotte': 'nomMascotte',
-          'lien avis google': 'lienAvisGoogle', 'facebook': 'facebook', 'instagram': 'instagram' };
-        Object.keys(map).forEach(function (k) { if (k in infos) D[map[k]] = infos[k]; });
-        if ('pizza du moment' in infos) {
-          D.pizzaDuMoment = { nom: infos['pizza du moment'], ingredients: infos['pizza du moment - ingredients'] || '',
-            prix26: nombre(infos['pizza du moment - prix 26'] || ''), prix29: nombre(infos['pizza du moment - prix 29'] || ''),
-            photo: infos['pizza du moment - photo'] || '' };
-        }
-      }
+      if (r[3].pizzas) D.carte = r[3].pizzas.filter(function (p) { return p && p.nom; }).map(function (p) {
+        return { nom: p.nom, base: /creme/.test(sansAccent(p.base || '')) ? 'creme' : 'tomate', ingredients: p.ingredients || '',
+          prix26: nombre(p.prix26), prix29: nombre(p.prix29), accueil: !!p.accueil, photo: chemin(p.photo) };
+      });
+      if (r[4].photos) D.galerie = r[4].photos.filter(function (p) { return p && p.photo; }).map(function (p) { return { photo: chemin(p.photo), legende: p.legende || '' }; });
+      if (r[5].avis) D.avis = r[5].avis.filter(function (a) { return a && a.texte; });
+      D.legal = r[6] || {};
       return D;
-    }).catch(function () { return D; });
+    });
   }
 
   /* ---------- Où est le camion ? ---------- */
@@ -179,6 +159,7 @@
   function rendreTicket(D) {
     var el = $('#ticket');
     if (!el) return;
+    D.carte = D.carte || [];
     var choix = D.carte.filter(function (p) { return p.accueil; });
     if (!choix.length) choix = D.carte.slice(0, 6);
     var html = '';
@@ -316,6 +297,85 @@
     }
   }
 
+  /* ---------- Galerie + visionneuse ---------- */
+  function rendreGalerie(D) {
+    var el = $('#galerie');
+    if (!el) return;
+    var photos = D.galerie || [];
+    el.innerHTML = photos.map(function (p, i) {
+      return '<figure class="galerie-item"><button type="button" class="galerie-bouton" data-index="' + i + '" aria-label="Agrandir' + (p.legende ? ' : ' + esc(p.legende) : ' la photo') + '">' +
+        '<img src="' + esc(p.photo) + '" alt="' + esc(p.legende) + '" loading="lazy"></button>' +
+        (p.legende ? '<figcaption>' + esc(p.legende) + '</figcaption>' : '') + '</figure>';
+    }).join('');
+    var dlg = $('#visionneuse');
+    if (!dlg || typeof dlg.showModal !== 'function') return;
+    var img = dlg.querySelector('img'), leg = dlg.querySelector('figcaption'), courant = 0;
+    function montrer(i) {
+      courant = (i + photos.length) % photos.length;
+      img.src = photos[courant].photo; img.alt = photos[courant].legende || '';
+      leg.textContent = photos[courant].legende || ''; leg.hidden = !photos[courant].legende;
+    }
+    el.querySelectorAll('.galerie-bouton').forEach(function (b) {
+      b.addEventListener('click', function () { montrer(+b.getAttribute('data-index')); dlg.showModal(); });
+    });
+    if (dlg.hasAttribute('data-branchee')) return;
+    dlg.setAttribute('data-branchee', '');
+    dlg.querySelector('[data-precedente]').addEventListener('click', function () { montrer(courant - 1); });
+    dlg.querySelector('[data-suivante]').addEventListener('click', function () { montrer(courant + 1); });
+    dlg.querySelector('[data-fermer]').addEventListener('click', function () { dlg.close(); });
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+    dlg.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') montrer(courant - 1);
+      if (e.key === 'ArrowRight') montrer(courant + 1);
+    });
+    var x0 = null;
+    dlg.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+    dlg.addEventListener('touchend', function (e) {
+      if (x0 === null) return;
+      var dx = e.changedTouches[0].clientX - x0; x0 = null;
+      if (Math.abs(dx) > 50) montrer(courant + (dx < 0 ? 1 : -1));
+    });
+  }
+
+  /* ---------- Actus : publications de la page Facebook (chargées seulement après un clic) ---------- */
+  function memoire(cle, val) {
+    try { if (val === undefined) return localStorage.getItem(cle); localStorage.setItem(cle, val); } catch (e) { return null; }
+  }
+  function rendreActus(D) {
+    var sec = $('#actus');
+    if (!sec) return;
+    sec.hidden = !D.facebook;
+    if (!D.facebook) return;
+    sec.querySelectorAll('[data-lien-facebook]').forEach(function (a) { a.href = D.facebook; });
+    var zone = $('#actus-fil');
+    function charger() {
+      var largeur = Math.min(500, zone.clientWidth || 500);
+      zone.innerHTML = '<iframe title="Publications Facebook de La Fringale" src="https://www.facebook.com/plugins/page.php?href=' + encodeURIComponent(D.facebook) +
+        '&tabs=timeline&width=' + largeur + '&height=640&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false&locale=fr_FR"' +
+        ' width="' + largeur + '" height="640" style="border:0;overflow:hidden;max-width:100%" scrolling="no" allowfullscreen loading="lazy"' +
+        ' allow="clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>';
+    }
+    if (memoire('fringale-facebook') === 'oui') { charger(); return; }
+    var b = $('#actus-charger');
+    if (b && !b.hasAttribute('data-branche')) {
+      b.setAttribute('data-branche', '');
+      b.addEventListener('click', function () {
+        if ($('#actus-memoriser') && $('#actus-memoriser').checked) memoire('fringale-facebook', 'oui');
+        charger();
+      });
+    }
+  }
+
+  /* ---------- Mentions légales ---------- */
+  function rendreLegal(D) {
+    var L = D.legal || {};
+    document.querySelectorAll('[data-legal]').forEach(function (el) {
+      var v = L[el.getAttribute('data-legal')];
+      el.textContent = v ? v : 'à compléter';
+      el.classList.toggle('a-completer', !v);
+    });
+  }
+
   /* ---------- Fenêtre avec le numéro de téléphone ---------- */
   var popupBranchee = false;
   function brancherPopupTel(D) {
@@ -365,7 +425,7 @@
   }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' }) : null;
 
   var EFFETS = [
-    ['monte', '.titre-section, .chapo, .astuce, .etape, .ticket, .famille-texte p, .fiche, .badge, .fidelite, .avis-carte, .groupe-titre, .moment, .filtres, .pizza, .info'],
+    ['monte', '.titre-section, .chapo, .astuce, .galerie-item, .actus-boite, .etape, .ticket, .famille-texte p, .fiche, .badge, .fidelite, .avis-carte, .groupe-titre, .moment, .filtres, .pizza, .info'],
     ['colle', '.polaroid, .patronne .sticker, .mascotte-fidelite']
   ];
   function animer() {
@@ -425,11 +485,13 @@
     rendreAvis(D);
     chargerAvisGoogle(D);
     rendreCarte(D);
+    rendreGalerie(D);
+    rendreActus(D);
+    rendreLegal(D);
     animer();
     brancherProfondeur();
   }
 
   var D = window.FRINGALE;
-  tout(D);                               // affichage immédiat avec donnees.js
-  if (D.googleSheetId) chargerSheet(D).then(tout);  // puis mise à jour depuis Google Sheets
+  chargerContenu(D).then(tout, function () { tout(D); });
 })();

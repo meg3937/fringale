@@ -1,0 +1,35 @@
+{
+  "annonce": "",
+  "telephone": "06 09 62 64 93",
+  "heureDebut": 17,
+  "heureFin": 21,
+  "pizzaDuMoment": {
+    "nom": "",
+    "ingredients": "",
+    "prix26": null,
+    "prix29": null,
+    "photo": ""
+  },
+  "nomMascotte": "",
+  "nomChienne": "Pops",
+  "photoShirley": "",
+  "roleShirley": "",
+  "roleDavid": "",
+  "photoCamion": "",
+  "facebook": "",
+  "instagram": "",
+  "photosAccueil": [
+    {
+      "photo": "images/pizzas/paysanne.jpg",
+      "legende": "La Paysanne"
+    },
+    {
+      "photo": "images/pizzas/speciale.jpg",
+      "legende": "La Spéciale"
+    },
+    {
+      "photo": "images/pizzas/burger.jpg",
+      "legende": "La Burger · cheddar, cornichons, tomates"
+    }
+  ]
+}

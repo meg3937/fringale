@@ -1,0 +1,24 @@
+{
+  "tournee": [
+    {
+      "jour": "Mardi",
+      "ville": "Ruminghem",
+      "lieu": "Place de la mairie"
+    },
+    {
+      "jour": "Mercredi",
+      "ville": "Coquelles",
+      "lieu": "Place de la poste"
+    },
+    {
+      "jour": "Vendredi",
+      "ville": "Ardres",
+      "lieu": "Place du marché"
+    },
+    {
+      "jour": "Samedi",
+      "ville": "Marquise",
+      "lieu": "Place du Franc Marché"
+    }
+  ]
+}

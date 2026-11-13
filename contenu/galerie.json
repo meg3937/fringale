@@ -1,0 +1,68 @@
+{
+  "photos": [
+    {
+      "photo": "images/pizzas/paysanne.jpg",
+      "legende": "La Paysanne"
+    },
+    {
+      "photo": "images/galerie/pops-lunettes.jpg",
+      "legende": "Pops, prête pour la tournée"
+    },
+    {
+      "photo": "images/pizzas/speciale.jpg",
+      "legende": "La Spéciale"
+    },
+    {
+      "photo": "images/pizzas/a-nommer-pesto-jambon-cru.jpg",
+      "legende": ""
+    },
+    {
+      "photo": "images/pizzas/savoyarde.jpg",
+      "legende": "La Savoyarde"
+    },
+    {
+      "photo": "images/galerie/pops-jardin.jpg",
+      "legende": "Pops"
+    },
+    {
+      "photo": "images/pizzas/burger.jpg",
+      "legende": "La Burger"
+    },
+    {
+      "photo": "images/pizzas/a-nommer-saint-jacques.jpg",
+      "legende": ""
+    },
+    {
+      "photo": "images/pizzas/normande.jpg",
+      "legende": "La Normande"
+    },
+    {
+      "photo": "images/pizzas/texane.jpg",
+      "legende": "La Texane"
+    },
+    {
+      "photo": "images/galerie/pops-noel.jpg",
+      "legende": "Pops version Noël"
+    },
+    {
+      "photo": "images/pizzas/a-nommer-pesto-poulet.jpg",
+      "legende": ""
+    },
+    {
+      "photo": "images/pizzas/morteau.jpg",
+      "legende": "La Morteau"
+    },
+    {
+      "photo": "images/pizzas/bolognaise.jpg",
+      "legende": "La Bolognaise"
+    },
+    {
+      "photo": "images/galerie/pops-contente.jpg",
+      "legende": "Pops, contente"
+    },
+    {
+      "photo": "images/pizzas/a-nommer-pommes-de-terre.jpg",
+      "legende": ""
+    }
+  ]
+}
