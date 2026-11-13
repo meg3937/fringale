@@ -172,14 +172,19 @@ a:hover { color: #fff; }
 /* ---------- Famille ---------- */
 .famille { background: var(--creme); color: var(--noir); }
 .famille a { color: var(--noir); }
-.famille .conteneur { display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start; padding-top: 64px; padding-bottom: 72px; }
+.famille .conteneur { display: flex; flex-wrap: wrap; gap: 40px; align-items: center; padding-top: 64px; padding-bottom: 72px; }
 .famille-texte { flex: 1 1 520px; min-width: 0; }
 .famille-texte p { font-size: 19px; margin: 0 0 14px; max-width: 58ch; }
 .famille .titre-section span { color: var(--rouge-fonce); }
 .photo-camion { margin-top: 24px; border: 3px solid var(--noir); width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
-.badge { flex: 0 1 340px; min-width: 0; border: 3px solid var(--noir); background: #fff; box-shadow: 8px 8px 0 var(--rouge-fonce); }
-.badge img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
-.badge div { padding: 14px 16px; border-top: 3px solid var(--noir); }
+.sticker { filter: drop-shadow(5px 7px 0 rgba(15, 15, 15, 0.28)); }
+.patronne { flex: 0 1 360px; min-width: 0; margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
+.patronne .sticker { width: 78%; max-width: 280px; transform: rotate(-5deg); position: relative; z-index: 1; }
+.badge {
+  position: relative; z-index: 2; margin-top: -48px; width: 100%;
+  border: 3px solid var(--noir); background: #fff; box-shadow: 8px 8px 0 var(--rouge-fonce);
+  padding: 14px 16px; transform: rotate(2deg);
+}
 .badge p { margin: 0; }
 .badge-numero { font-family: var(--mono); font-size: 12px; text-transform: uppercase; }
 .badge-nom { font-family: var(--titre); font-size: 30px; text-transform: uppercase; margin: 2px 0 6px !important; }
@@ -195,6 +200,9 @@ a:hover { color: #fff; }
 /* ---------- Fidélité ---------- */
 .fidelite { border: 3px dashed var(--creme); padding: 22px; display: flex; flex-wrap: wrap; gap: 8px 24px; align-items: center; justify-content: space-between; }
 .fidelite strong { font-family: var(--titre); font-weight: 400; font-size: 34px; text-transform: uppercase; line-height: 1.1; }
+.fidelite > div { flex: 1 1 320px; }
+.sticker-fidelite { width: 150px; transform: rotate(8deg); margin: -60px 0 -40px; filter: drop-shadow(5px 7px 0 rgba(0, 0, 0, 0.5)); }
+@media (max-width: 700px) { .sticker-fidelite { width: 120px; margin: 0 auto -50px; } }
 
 /* ---------- Pied de page ---------- */
 .pied { background: var(--rouge); color: #fff; }
