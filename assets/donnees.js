@@ -96,12 +96,13 @@ window.FRINGALE = {
   ],
 
   /* ---------- Avis Google en direct ----------
-     Avec une clé Google Maps (restreinte au site) et l'identifiant de la fiche,
-     les 5 avis mis en avant par Google et la note s'affichent tout seuls.
+     Avec une clé Google (restreinte au site) et l'identifiant de la fiche, la note
+     et le nombre d'avis s'affichent tout seuls. Google ne fournit pas le texte des avis
+     de cette fiche : les avis affichés sont ceux copiés à la main dans « avis » ci-dessous.
      Voir le README, partie « Avis Google ».
   */
-  googleMapsCle: '',
-  googlePlaceId: '',
+  googleMapsCle: 'AIzaSyCWF0kDC17I59opaHeMh78tTzpLjpzsiY8',   // clé restreinte au site
+  googlePlaceId: 'ChIJJc9wwvxF3EcR4OIpEm29WsI',               // La Fringale, Ardres
 
   /* ---------- Avis choisis à la main (utilisés si les avis en direct ne sont pas branchés) ----------
      Copier ici de vrais avis de la fiche Google. Exemple :

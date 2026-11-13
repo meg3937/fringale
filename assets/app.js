@@ -257,29 +257,21 @@
     afficherAvis(D, (D.avis || []).map(function (a) { return { auteur: a.auteur, texte: a.texte, note: a.note || 5 }; }), null);
   }
 
-  /* ---------- Avis Google en direct (si une clé et un identifiant de fiche sont renseignés) ---------- */
+  /* ---------- Avis Google en direct (note, nombre d'avis et avis si Google les fournit) ---------- */
   var avisGoogleCharges = false;
   function chargerAvisGoogle(D) {
-    if (avisGoogleCharges || !D.googleMapsCle || !D.googlePlaceId || !$('#avis-liste')) return;
+    if (avisGoogleCharges || !D.googleMapsCle || !D.googlePlaceId || !$('#avis-bloc') || !window.fetch) return;
     avisGoogleCharges = true;
-    window.__fringaleAvis = function () {
-      google.maps.importLibrary('places').then(function (lib) {
-        var place = new lib.Place({ id: D.googlePlaceId, requestedLanguage: 'fr' });
-        return place.fetchFields({ fields: ['rating', 'userRatingCount', 'reviews', 'googleMapsURI'] }).then(function () {
-          var liste = (place.reviews || []).filter(function (r) { return r.text; }).map(function (r) {
-            var aut = r.authorAttribution || {};
-            return { auteur: aut.displayName || 'Client Google', lien: aut.uri, photo: aut.photoURI, note: r.rating, texte: r.text, quand: r.relativePublishTimeDescription };
-          });
-          if (place.googleMapsURI && !D.lienLireAvis) D.lienLireAvis = place.googleMapsURI;
-          if (!liste.length) return;
-          afficherAvis(D, liste, { note: place.rating, nombre: place.userRatingCount });
-        });
-      }).catch(function () { /* en cas d'échec, on garde les avis de donnees.js */ });
-    };
-    var sc = document.createElement('script');
-    sc.src = 'https://maps.googleapis.com/maps/api/js?key=' + encodeURIComponent(D.googleMapsCle) + '&v=weekly&loading=async&language=fr&callback=__fringaleAvis';
-    sc.async = true;
-    document.head.appendChild(sc);
+    fetch('https://places.googleapis.com/v1/places/' + encodeURIComponent(D.googlePlaceId) + '?languageCode=fr', {
+      headers: { 'X-Goog-Api-Key': D.googleMapsCle, 'X-Goog-FieldMask': 'rating,userRatingCount,reviews,googleMapsUri' }
+    }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }).then(function (p) {
+      var google = (p.reviews || []).filter(function (r) { return r.text && r.text.text; }).map(function (r) {
+        var aut = r.authorAttribution || {};
+        return { auteur: aut.displayName || 'Client Google', lien: aut.uri, photo: aut.photoUri, note: r.rating, texte: r.text.text, quand: r.relativePublishTimeDescription };
+      });
+      var manuels = (D.avis || []).map(function (a) { return { auteur: a.auteur, texte: a.texte, note: a.note || 5 }; });
+      afficherAvis(D, google.length ? google : manuels, p.rating ? { note: p.rating, nombre: p.userRatingCount } : null);
+    }).catch(function () { /* en cas d'échec, on garde les avis de donnees.js */ });
   }
 
   function rendreCarte(D) {
