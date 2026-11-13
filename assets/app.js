@@ -263,7 +263,7 @@
     if (avisGoogleCharges || !D.googleMapsCle || !D.googlePlaceId || !$('#avis-bloc') || !window.fetch) return;
     avisGoogleCharges = true;
     fetch('https://places.googleapis.com/v1/places/' + encodeURIComponent(D.googlePlaceId) + '?languageCode=fr', {
-      headers: { 'X-Goog-Api-Key': D.googleMapsCle, 'X-Goog-FieldMask': 'rating,userRatingCount,reviews,googleMapsUri' }
+      headers: { 'X-Goog-Api-Key': D.googleMapsCle, 'X-Goog-FieldMask': D.googleAvisTextes ? 'rating,userRatingCount,reviews' : 'rating,userRatingCount' }
     }).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }).then(function (p) {
       var google = (p.reviews || []).filter(function (r) { return r.text && r.text.text; }).map(function (r) {
         var aut = r.authorAttribution || {};
