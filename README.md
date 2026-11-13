@@ -25,7 +25,7 @@ Publié avec GitHub Pages : https://meg3937.github.io/fringale/
 
 Shirley et David modifient le site depuis **Pages CMS** (https://app.pagescms.org), un outil
 gratuit qui affiche des formulaires à la place du code. Le lien est sur la page `admin.html`
-(« Espace d'édition » en bas de chaque page).
+(adresse à garder en favori : https://meg3937.github.io/fringale/admin.html).
 
 Menus disponibles : **Infos et annonce** (annonce, pizza du moment, téléphone, horaires, photos
 de l'accueil, photo de Shirley, Facebook…), **Congés**, **La tournée**, **La carte**, **Galerie**,
