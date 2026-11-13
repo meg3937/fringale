@@ -66,7 +66,7 @@
           </div>
         </div>
         <div class="heros-visuel">
-          <img class="mascotte" src="images/mascotte.png" width="779" height="511" alt="La mascotte de La Fringale : un piment rouge qui tient une pelle à pizza et lève le pouce">
+          <img class="mascotte" src="images/mascotte.webp" width="1400" height="895" alt="La mascotte de La Fringale : un piment rouge qui tient une pelle à pizza et lève le pouce">
           <p class="bulle" id="bulle">Salut ! Moi, je goûte tout avant toi.</p>
           <p class="tampon" aria-label="En famille depuis 2005">Depuis<strong>2005</strong>en famille</p>
         </div>
@@ -105,31 +105,32 @@
           <img class="photo-camion" id="photo-camion" src="" alt="Le camion de La Fringale" hidden>
         </div>
 
-        <div class="equipe" id="equipe">
-          <h3 class="equipe-titre">Derrière le camion</h3>
-          <div class="equipe-grille">
-            <figure class="membre">
-              <div class="membre-cadre">
-                <img id="photo-shirley" src="" alt="Shirley" width="600" height="600" loading="lazy" hidden>
-                <span class="membre-initiale" id="initiale-shirley" aria-hidden="true">S</span>
-                <figcaption><strong>Shirley</strong><span>Aux commandes depuis 2005</span></figcaption>
-              </div>
-            </figure>
-            <figure class="membre">
-              <div class="membre-cadre">
-                <img src="images/david.jpg" alt="David" width="440" height="440" loading="lazy">
-                <figcaption><strong>David</strong><span>Aux commandes depuis 2005</span></figcaption>
-              </div>
-            </figure>
-            <div class="patronne">
-              <img class="sticker" src="images/chienne-lunettes.webp" width="486" height="960" alt="Pops, la cocker rousse de la famille, avec des lunettes de soleil" loading="lazy">
-              <div class="badge">
-                <p class="badge-numero" id="badge-numero">Badge n°001 · La vraie patronne</p>
-                <p class="badge-nom" id="nom-chienne">Pops</p>
-                <p>Elle ne rate aucune tournée. Elle reste dans la cabine et monte la garde.</p>
-              </div>
-            </div>
+        <div class="patronne">
+          <img class="sticker" src="images/chienne-lunettes.webp" width="486" height="960" alt="Pops, la cocker rousse de la famille, avec des lunettes de soleil" loading="lazy">
+          <div class="badge">
+            <p class="badge-numero" id="badge-numero">Badge n°001 · La vraie patronne</p>
+            <p class="badge-nom" id="nom-chienne">Pops</p>
+            <p>Elle ne rate aucune tournée. Elle reste dans la cabine et monte la garde.</p>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Affichée dès que photoShirley est renseignée dans assets/donnees.js -->
+    <section class="section duo" id="equipe" aria-labelledby="titre-equipe" hidden>
+      <div class="conteneur">
+        <h2 class="titre-section" id="titre-equipe">Derrière le camion</h2>
+        <div class="duo-grille">
+          <article class="fiche">
+            <div class="fiche-photo"><img id="photo-shirley" src="" alt="Shirley" width="600" height="750" loading="lazy"></div>
+            <h3 class="fiche-nom">Shirley</h3>
+            <p class="fiche-role" id="role-shirley">Aux commandes depuis 2005</p>
+          </article>
+          <article class="fiche">
+            <div class="fiche-photo"><img src="images/david.jpg" alt="David" width="440" height="440" loading="lazy"></div>
+            <h3 class="fiche-nom">David</h3>
+            <p class="fiche-role" id="role-david">Aux commandes depuis 2005</p>
+          </article>
         </div>
       </div>
     </section>
@@ -150,7 +151,7 @@
             <strong>10 points = 1 pizza offerte</strong>
             <p class="note-mono" style="margin: 6px 0 0">Collecte les points sur tes boîtes à pizza. À partir de 10, c’est cadeau.</p>
           </div>
-          <img class="mascotte-fidelite" src="images/mascotte.png" width="779" height="511" alt="" loading="lazy">
+          <img class="mascotte-fidelite" src="images/mascotte.webp" width="1400" height="895" alt="" loading="lazy">
         </div>
       </div>
     </section>

@@ -209,11 +209,10 @@
     if (nom) nom.textContent = D.nomChienne || 'La vraie patronne';
     var num = $('#badge-numero');
     if (num) num.textContent = D.nomChienne ? 'Badge n°001 · La vraie patronne' : 'Badge n°001 · Sécurité cabine';
-    var sh = $('#photo-shirley');
-    if (sh && D.photoShirley) {
-      sh.src = D.photoShirley; sh.hidden = false;
-      var ini = $('#initiale-shirley'); if (ini) ini.hidden = true;
-    }
+    var sh = $('#photo-shirley'), eq = $('#equipe');
+    if (sh && eq && D.photoShirley) { sh.src = D.photoShirley; eq.hidden = false; }
+    if (D.roleShirley && $('#role-shirley')) $('#role-shirley').textContent = D.roleShirley;
+    if (D.roleDavid && $('#role-david')) $('#role-david').textContent = D.roleDavid;
     var bulle = $('#bulle');
     if (bulle) bulle.textContent = D.nomMascotte ? 'Salut, moi c’est ' + D.nomMascotte + '. Je goûte tout avant toi.' : 'Salut ! Moi, je goûte tout avant toi.';
     var cam = $('#photo-camion');
@@ -328,7 +327,7 @@
   }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' }) : null;
 
   var EFFETS = [
-    ['monte', '.titre-section, .chapo, .astuce, .etape, .ticket, .famille-texte p, .equipe-titre, .membre, .badge, .fidelite, .avis-carte, .groupe-titre, .moment, .filtres, .pizza, .info'],
+    ['monte', '.titre-section, .chapo, .astuce, .etape, .ticket, .famille-texte p, .fiche, .badge, .fidelite, .avis-carte, .groupe-titre, .moment, .filtres, .pizza, .info'],
     ['colle', '.polaroid, .patronne .sticker, .mascotte-fidelite']
   ];
   function animer() {

@@ -105,7 +105,7 @@ a:hover { color: #fff; }
 .heros-actions p { margin: 0; max-width: 30ch; font-size: 15px; }
 
 .heros-visuel { flex: 1 1 440px; min-width: 0; position: relative; display: flex; justify-content: center; padding-top: 56px; }
-.mascotte { width: 100%; max-width: 600px; height: auto; mix-blend-mode: lighten; }
+.mascotte { width: 100%; max-width: 600px; height: auto; }
 .bulle {
   position: absolute; top: 0; right: 0; max-width: 230px;
   background: var(--creme); color: var(--noir); border: 3px solid var(--noir);
@@ -280,23 +280,23 @@ a:hover { color: #fff; }
   .pied-infos { text-align: left; }
 }
 
-/* ---------- Équipe ---------- */
-.equipe { flex: 1 1 100%; margin-top: 24px; }
-.equipe-titre { margin: 0 0 32px; font-family: var(--titre); font-weight: 400; font-size: 40px; text-transform: uppercase; }
-.equipe-grille { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 40px 32px; align-items: end; }
-.membre { margin: 0; }
-.membre-cadre { background: #fff; border: 3px solid var(--noir); padding: 12px 12px 0; box-shadow: 6px 6px 0 var(--noir); max-width: 320px; margin: 0 auto; }
-.membre:nth-child(1) .membre-cadre { transform: rotate(-2deg); }
-.membre:nth-child(2) .membre-cadre { transform: rotate(1.5deg); }
-.membre-cadre img, .membre-initiale { width: 100%; aspect-ratio: 1; object-fit: cover; }
-.membre-initiale { display: flex; align-items: center; justify-content: center; background: var(--rouge); color: var(--creme); font-family: var(--titre); font-size: 140px; line-height: 1; }
-.membre figcaption { padding: 12px 4px 14px; display: flex; flex-direction: column; }
-.membre strong { font-family: var(--titre); font-weight: 400; font-size: 32px; text-transform: uppercase; line-height: 1.1; }
-.membre figcaption span { font-family: var(--mono); font-size: 12px; text-transform: uppercase; }
-.equipe .patronne { flex: none; }
+/* ---------- Derrière le camion ---------- */
+.duo-grille { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 48px 64px; margin-top: 36px; }
+.fiche { position: relative; max-width: 460px; }
+.fiche:nth-child(2) { margin-top: 72px; }
+.fiche-photo { border: 3px solid var(--creme); box-shadow: 10px 10px 0 var(--rouge); }
+.fiche-photo img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+.fiche-nom {
+  position: relative; display: inline-block; margin: -34px 0 0 -14px;
+  background: var(--rouge); color: #fff; padding: 2px 16px 4px;
+  font-family: var(--titre); font-weight: 400; font-size: clamp(44px, 6vw, 64px); line-height: 1.05; text-transform: uppercase;
+  transform: rotate(-3deg);
+}
+.fiche-role { margin: 14px 0 0; font-family: var(--mono); font-size: 14px; text-transform: uppercase; }
+@media (max-width: 700px) { .fiche:nth-child(2) { margin-top: 0; } }
 
 /* ---------- Fidélité : mascotte ---------- */
-.mascotte-fidelite { width: 220px; mix-blend-mode: lighten; margin: -30px -10px -30px 0; }
+.mascotte-fidelite { width: 220px; margin: -30px -10px -30px 0; }
 @media (max-width: 700px) { .mascotte-fidelite { width: 200px; margin: 8px auto -10px; } }
 
 /* ---------- Fenêtre du numéro ---------- */

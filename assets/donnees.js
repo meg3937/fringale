@@ -19,7 +19,9 @@ window.FRINGALE = {
   // Laisser vide '' tant qu'on n'a pas l'info : le site s'adapte.
   nomMascotte: '',         // ex : 'Fringant'
   nomChienne: 'Pops',
-  photoShirley: '',        // ex : 'images/shirley.jpg'
+  photoShirley: '',        // ex : 'images/shirley.jpg' (la section « Derrière le camion » s'affiche alors)
+  roleShirley: '',         // petite phrase sous son nom (sinon « Aux commandes depuis 2005 »)
+  roleDavid: '',
   lienAvisGoogle: '',      // lien de la fiche Google (celui du QR code)
   facebook: '',
   instagram: '',
