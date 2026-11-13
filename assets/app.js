@@ -263,6 +263,7 @@
           el.setAttribute('data-filtre-actif', b.getAttribute('data-filtre'));
           document.querySelectorAll('.filtre').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
           rendreCarte(window.FRINGALE);
+          animer();
         });
       });
       el.setAttribute('data-filtre-actif', filtre);
@@ -317,6 +318,63 @@
     if (an) an.textContent = new Date().getFullYear();
   }
 
+  /* ---------- Effets : apparitions au scroll et profondeur ---------- */
+  var animOK = !!(window.matchMedia && !window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window);
+  if (animOK) document.documentElement.classList.add('anim-on');
+  var observateur = animOK ? new IntersectionObserver(function (entrees) {
+    entrees.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observateur.unobserve(e.target); }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' }) : null;
+
+  var EFFETS = [
+    ['monte', '.titre-section, .chapo, .astuce, .etape, .ticket, .famille-texte p, .equipe-titre, .membre, .badge, .fidelite, .avis-carte, .groupe-titre, .moment, .filtres, .pizza, .info'],
+    ['colle', '.polaroid, .patronne .sticker, .mascotte-fidelite']
+  ];
+  function animer() {
+    if (!animOK) return;
+    EFFETS.forEach(function (e) {
+      document.querySelectorAll(e[1]).forEach(function (el) {
+        if (el.hasAttribute('data-anim')) return;
+        el.setAttribute('data-anim', e[0]);
+        var freres = Array.prototype.filter.call(el.parentNode.children, function (x) { return x.matches(e[1]); });
+        el.style.setProperty('--i', Math.max(0, freres.indexOf(el)) % 6);
+        observateur.observe(el);
+      });
+    });
+  }
+
+  var PROFONDEUR = [['.heros .mascotte', 0.12], ['.tampon', 0.22], ['.patronne .sticker', 0.1], ['.mascotte-fidelite', 0.16]];
+  var elementsProfonds = [];
+  function brancherProfondeur() {
+    if (!animOK || elementsProfonds.length) return;
+    PROFONDEUR.forEach(function (p) {
+      document.querySelectorAll(p[0]).forEach(function (el) { el.setAttribute('data-profondeur', ''); elementsProfonds.push({ el: el, f: p[1], base: 0 }); });
+    });
+    if (!elementsProfonds.length) return;
+    function mesurer() {
+      elementsProfonds.forEach(function (o) {
+        o.el.style.translate = '0 0';
+        var r = o.el.getBoundingClientRect();
+        o.base = r.top + window.scrollY + r.height / 2;
+      });
+      maj();
+    }
+    var enAttente = false;
+    function maj() {
+      enAttente = false;
+      var milieu = window.scrollY + window.innerHeight / 2;
+      elementsProfonds.forEach(function (o) {
+        var d = Math.max(-70, Math.min(70, (o.base - milieu) * o.f));
+        o.el.style.translate = '0 ' + d.toFixed(1) + 'px';
+      });
+    }
+    window.addEventListener('scroll', function () { if (!enAttente) { enAttente = true; requestAnimationFrame(maj); } }, { passive: true });
+    window.addEventListener('resize', mesurer);
+    window.addEventListener('load', mesurer);
+    mesurer();
+  }
+
   function tout(D) {
     var maintenant = new Date();
     var s = statut(D, maintenant);
@@ -329,6 +387,8 @@
     rendreFamille(D);
     rendreAvis(D);
     rendreCarte(D);
+    animer();
+    brancherProfondeur();
   }
 
   var D = window.FRINGALE;
