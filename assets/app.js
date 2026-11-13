@@ -8,6 +8,7 @@
   var MOIS = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
 
   function $(sel) { return document.querySelector(sel); }
+  var animOK = !!(window.matchMedia && !window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window);
   function esc(v) {
     return String(v == null ? '' : v).replace(/[&<>"']/g, function (c) {
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
@@ -213,7 +214,16 @@
   }
   function afficherAvis(D, liste, resume) {
     var el = $('#avis-liste');
-    if (el) { el.innerHTML = liste.map(carteAvis).join(''); el.hidden = !liste.length; }
+    if (el) {
+      var cartes = liste.map(carteAvis).join('');
+      // Défilement continu : la liste est doublée pour boucler sans à-coup (le double est masqué aux lecteurs d'écran)
+      var defile = liste.length >= 3 && animOK;
+      el.classList.toggle('avis-defile', defile);
+      el.innerHTML = defile
+        ? '<div class="avis-piste" style="--duree:' + (liste.length * 9) + 's">' + cartes + '<div class="avis-double" aria-hidden="true">' + cartes + '</div></div>'
+        : cartes;
+      el.hidden = !liste.length;
+    }
     var r = $('#avis-resume');
     if (r) {
       if (resume && resume.note) {
@@ -416,7 +426,6 @@
   }
 
   /* ---------- Effets : apparitions au scroll et profondeur ---------- */
-  var animOK = !!(window.matchMedia && !window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window);
   if (animOK) document.documentElement.classList.add('anim-on');
   var observateur = animOK ? new IntersectionObserver(function (entrees) {
     entrees.forEach(function (e) {
@@ -425,7 +434,7 @@
   }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' }) : null;
 
   var EFFETS = [
-    ['monte', '.titre-section, .chapo, .astuce, .galerie-item, .actus-boite, .etape, .ticket, .famille-texte p, .fiche, .badge, .fidelite, .avis-carte, .groupe-titre, .moment, .filtres, .pizza, .info'],
+    ['monte', '.titre-section, .chapo, .astuce, .galerie-item, .actus-boite, .etape, .ticket, .famille-texte p, .fiche, .badge, .fidelite, .groupe-titre, .moment, .filtres, .pizza, .info'],
     ['colle', '.polaroid, .patronne .sticker, .mascotte-fidelite']
   ];
   function animer() {
