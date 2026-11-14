@@ -205,6 +205,11 @@
     n = Math.max(0, Math.min(5, Math.round(Number(n) || 0)));
     return '<span class="etoiles" aria-label="' + n + ' sur 5">' + '★★★★★'.slice(0, n) + '<span class="etoiles-vides">' + '★★★★★'.slice(n) + '</span></span>';
   }
+  function prenomInitiale(nom) {
+    var mots = String(nom || '').trim().split(/\s+/).filter(Boolean);
+    if (mots.length < 2) return mots[0] || '';
+    return mots[0] + ' ' + mots[mots.length - 1].charAt(0).toUpperCase() + '.';
+  }
   function carteAvis(a) {
     var auteur = a.lien ? '<a href="' + esc(a.lien) + '" target="_blank" rel="noopener">' + esc(a.auteur) + '</a>' : esc(a.auteur);
     return '<figure class="avis-carte">' + etoiles(a.note) +
@@ -245,7 +250,7 @@
     document.querySelectorAll('[data-lien-lire]').forEach(function (a) {
       if (D.lienLireAvis) { a.href = D.lienLireAvis; a.hidden = false; } else a.hidden = true;
     });
-    afficherAvis(D, (D.avis || []).map(function (a) { return { auteur: a.auteur, texte: a.texte, note: a.note || 5 }; }), null);
+    afficherAvis(D, (D.avis || []).map(function (a) { return { auteur: prenomInitiale(a.auteur), texte: a.texte, note: a.note || 5 }; }), null);
   }
 
   /* ---------- Avis Google en direct (note, nombre d'avis et avis si Google les fournit) ---------- */
@@ -260,7 +265,7 @@
         var aut = r.authorAttribution || {};
         return { auteur: aut.displayName || 'Client Google', lien: aut.uri, photo: aut.photoUri, note: r.rating, texte: r.text.text, quand: r.relativePublishTimeDescription };
       });
-      var manuels = (D.avis || []).map(function (a) { return { auteur: a.auteur, texte: a.texte, note: a.note || 5 }; });
+      var manuels = (D.avis || []).map(function (a) { return { auteur: prenomInitiale(a.auteur), texte: a.texte, note: a.note || 5 }; });
       afficherAvis(D, google.length ? google : manuels, p.rating ? { note: p.rating, nombre: p.userRatingCount } : null);
     }).catch(function () { /* en cas d'échec, on garde les avis de donnees.js */ });
   }
