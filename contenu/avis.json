@@ -1,3 +1,49 @@
 {
-  "avis": []
+  "avis": [
+    {
+      "auteur": "Fabien Dufossé",
+      "texte": "Un régal la Fringale 😉\nMerci pour l’accueil, le service mais surtout pour votre bonne humeur sous ce soleil chauffant.\nPetit plus qui m’a conquis le surplus cornichons sur la burger un délice 😋",
+      "note": 5
+    },
+    {
+      "auteur": "L NO",
+      "texte": "Très bonne pizzeria ambulante, les pizzas sont garnies et délicieuses!\nJe recommande à 100%",
+      "note": 5
+    },
+    {
+      "auteur": "Jean Paul Balloy",
+      "texte": "Bonjour je remercie Shirley et David pizzeria la Fringale un service au top des pizzas de qualité un régal je vs conseille cette adresse les yeux fermés",
+      "note": 5
+    },
+    {
+      "auteur": "Ingrid Defeyer",
+      "texte": "Je recommande vivement toujours au top délicieuses bien servie et très bon accueil merci a vous\nIngrid",
+      "note": 5
+    },
+    {
+      "auteur": "Adrien Hantute",
+      "texte": "top👍👍chien très gentil",
+      "note": 5
+    },
+    {
+      "auteur": "Céline Zègre",
+      "texte": "Encore merci pour cette superbe soirée\nNos invités ont été plus que ravis\nC était un régal !",
+      "note": 5
+    },
+    {
+      "auteur": "Aurelie THUILLIEZ",
+      "texte": "Les filles sont au TOP\nRapidité, efficacité mais surtout un .... je sais pas comment le décrire tellement c'est bon (la burger et la catalane sont mes préférées).\nCommande par SMS, pour ma part, retour rapide (1 min) et oui d'où l'efficacité 🤣\nMerci a vous pour ces superbes soirées Pizzas que nous avons",
+      "note": 5
+    },
+    {
+      "auteur": "Ludivine Duquenoy",
+      "texte": "Super bonne et copieuse!!! Pour une première Je recommande fortement !!! Énorme merci",
+      "note": 5
+    },
+    {
+      "auteur": "Grégory Cardeur",
+      "texte": "Ça fait 16 ans que nous habitons dans le secteur, et pourtant nous ne connaissions pas le duo, qui est installé depuis 20 ans !\n\nComme il n’est jamais trop tard pour bien faire, nous avons commandé, et renouvellerons l’expérience sans hésiter ! Pizzas bien garnies et savoureuses ! Bravo à eux !",
+      "note": 5
+    }
+  ]
 }
